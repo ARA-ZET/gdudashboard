@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "957457670623",
+    "project_id": "gdudashboard",
+    "storage_bucket": "gdudashboard.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:957457670623:android:7206cbce52788ce1d4e46a",
+        "android_client_info": {
+          "package_name": "com.example.golden_diamond"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgj-7V9PcPkA2C1b_j7VU6pNU7jwm26zA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
