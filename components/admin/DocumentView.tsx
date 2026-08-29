@@ -94,7 +94,11 @@ export function DocumentView({ doc, business = {} }: { doc: BusinessDoc; busines
       </div>
 
       {/* Banking + Notes */}
-      <div className="mt-8 grid gap-6 border-t border-outline-variant/60 pt-5 sm:grid-cols-2">
+      {/* Unconditional two columns, never a `sm:` breakpoint. The sheet is always
+          210mm wide, but Tailwind's responsive prefixes key off the viewport, so
+          a breakpoint here would stack on a narrow screen while still printing
+          side by side — the preview would stop matching the page. */}
+      <div className="mt-8 grid grid-cols-2 gap-6 border-t border-outline-variant/60 pt-5">
         {hasBanking ? (
           <div>
             <div className="text-[11px] font-semibold uppercase tracking-wide text-ink-muted">Banking details</div>

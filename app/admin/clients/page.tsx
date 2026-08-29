@@ -38,8 +38,8 @@ export default function ClientsPage() {
       ) : (
         <Card className="overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-[14px]">
-              <thead className="border-b border-outline-variant/60 bg-surface-dim text-[12px] uppercase tracking-wide text-ink-muted">
+            <table className="w-full text-left text-[13px]">
+              <thead className="border-b border-outline-variant/60 bg-surface-dim text-[11px] uppercase tracking-wide text-ink-muted">
                 <tr>
                   <th className="px-4 py-3 font-semibold">Name</th>
                   <th className="px-4 py-3 font-semibold">Email</th>
@@ -94,7 +94,7 @@ function ClientForm({ client, onClose }: { client: Client | null; onClose: () =>
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-0 sm:items-center sm:p-4" onClick={onClose}>
       <div className="w-full max-w-lg rounded-t-xl bg-white p-6 shadow-ambient-lg sm:rounded-xl" onClick={(e) => e.stopPropagation()}>
         <div className="mb-5 flex items-center justify-between">
-          <h2 className="font-serif text-xl font-bold text-navy">{client ? 'Edit client' : 'New client'}</h2>
+          <h2 className="font-serif text-lg font-bold text-navy">{client ? 'Edit client' : 'New client'}</h2>
           <button onClick={onClose} aria-label="Close"><Icon name="close" className="h-5 w-5 text-ink-muted" /></button>
         </div>
         <form onSubmit={save} className="space-y-4">

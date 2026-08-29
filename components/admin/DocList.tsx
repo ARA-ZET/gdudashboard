@@ -35,8 +35,8 @@ export function DocList({ kind }: { kind: 'quote' | 'invoice' }) {
       ) : (
         <Card className="overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-[14px]">
-              <thead className="border-b border-outline-variant/60 bg-surface-dim text-[12px] uppercase tracking-wide text-ink-muted">
+            <table className="w-full text-left text-[13px]">
+              <thead className="border-b border-outline-variant/60 bg-surface-dim text-[11px] uppercase tracking-wide text-ink-muted">
                 <tr>
                   <th className="px-4 py-3 font-semibold">Number</th>
                   <th className="px-4 py-3 font-semibold">Client</th>

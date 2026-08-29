@@ -36,12 +36,12 @@ export default function SettingsPage() {
         <p className="text-ink-muted">Loading…</p>
       ) : (
         <div className="max-w-3xl space-y-6">
-          <p className="text-[14px] text-ink-muted">
+          <p className="text-[13px] text-ink-muted">
             These details appear on every quote and invoice. Fill them in once — you can update them anytime.
           </p>
 
           <Card className="p-6">
-            <h3 className="mb-4 font-serif text-lg font-bold text-navy">Business details</h3>
+            <h3 className="mb-4 font-serif text-base font-bold text-navy">Business details</h3>
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="sm:col-span-2"><Field label="Business name" hint="Defaults to “Golden Diamond Upholstery” if left blank."><Input value={form.name ?? ''} onChange={set('name')} placeholder="Golden Diamond Upholstery" /></Field></div>
               <div className="sm:col-span-2"><Field label="Address"><Textarea rows={2} value={form.addressLines ?? ''} onChange={set('addressLines')} placeholder="45 Bree Street, Cape Town CBD, 8001" /></Field></div>
@@ -56,8 +56,8 @@ export default function SettingsPage() {
           </Card>
 
           <Card className="p-6">
-            <h3 className="mb-1 font-serif text-lg font-bold text-navy">Banking details</h3>
-            <p className="mb-4 text-[13px] text-ink-muted">Shown on invoices (and quotes) so clients can pay you. The document number is used as the payment reference.</p>
+            <h3 className="mb-1 font-serif text-base font-bold text-navy">Banking details</h3>
+            <p className="mb-4 text-[12px] text-ink-muted">Shown on invoices (and quotes) so clients can pay you. The document number is used as the payment reference.</p>
             <div className="grid gap-4 sm:grid-cols-2">
               <Field label="Bank"><Input value={form.bankName ?? ''} onChange={set('bankName')} placeholder="First National Bank" /></Field>
               <Field label="Account name"><Input value={form.accountName ?? ''} onChange={set('accountName')} placeholder="Golden Diamond Upholstery" /></Field>
@@ -68,8 +68,8 @@ export default function SettingsPage() {
           </Card>
 
           <Card className="p-6">
-            <h3 className="mb-1 font-serif text-lg font-bold text-navy">Default terms</h3>
-            <p className="mb-4 text-[13px] text-ink-muted">Prefilled into the notes/terms of every new quote & invoice (you can still edit per document).</p>
+            <h3 className="mb-1 font-serif text-base font-bold text-navy">Default terms</h3>
+            <p className="mb-4 text-[12px] text-ink-muted">Prefilled into the notes/terms of every new quote & invoice (you can still edit per document).</p>
             <Field label="Default notes / terms">
               <Textarea rows={3} value={form.paymentTerms ?? ''} onChange={set('paymentTerms')} placeholder="50% deposit to confirm. Balance due on completion. Lead time 1–3 weeks." />
             </Field>
@@ -77,7 +77,7 @@ export default function SettingsPage() {
 
           <div className="flex items-center gap-3">
             <Button variant="gold" onClick={save} disabled={busy}><Icon name="check" className="h-4 w-4" /> {busy ? 'Saving…' : 'Save settings'}</Button>
-            {saved && <span className="text-[14px] font-medium text-emerald-700">Saved ✓</span>}
+            {saved && <span className="text-[13px] font-medium text-emerald-700">Saved ✓</span>}
           </div>
         </div>
       )}

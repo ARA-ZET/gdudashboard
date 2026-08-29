@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { AdminShell } from './AdminShell';
 import { DocumentEditor } from './DocumentEditor';
 import { DocumentView } from './DocumentView';
+import { A4Preview } from './A4Preview';
 import { Button, Card, Select, StatusBadge } from './ui';
 import { Icon } from '@/components/Icon';
 import {
@@ -67,7 +68,7 @@ export function DocumentDetail({ kind, id }: { kind: 'quote' | 'invoice'; id: st
               {quoteStatuses.map((s) => <option key={s} value={s}>{s[0].toUpperCase() + s.slice(1)}</option>)}
             </Select>
             {doc.convertedInvoiceId ? (
-              <Link href={`/admin/invoices/${doc.convertedInvoiceId}`} className="text-[13px] font-semibold text-navy underline decoration-gold">View linked invoice →</Link>
+              <Link href={`/admin/invoices/${doc.convertedInvoiceId}`} className="text-[12px] font-semibold text-navy underline decoration-gold">View linked invoice →</Link>
             ) : (
               <Button variant="primary" onClick={convert} disabled={busy}><Icon name="arrow" className="h-4 w-4" /> Convert to invoice</Button>
             )}
@@ -78,7 +79,7 @@ export function DocumentDetail({ kind, id }: { kind: 'quote' | 'invoice'; id: st
               <Icon name={doc.status === 'paid' ? 'close' : 'check'} className="h-4 w-4" />
               {doc.status === 'paid' ? 'Mark unpaid' : 'Mark paid'}
             </Button>
-            {doc.sourceQuoteId && <Link href={`/admin/quotes/${doc.sourceQuoteId}`} className="text-[13px] font-semibold text-navy underline decoration-gold">From quote →</Link>}
+            {doc.sourceQuoteId && <Link href={`/admin/quotes/${doc.sourceQuoteId}`} className="text-[12px] font-semibold text-navy underline decoration-gold">From quote →</Link>}
           </>
         )}
         <div className="ml-auto">
@@ -86,7 +87,9 @@ export function DocumentDetail({ kind, id }: { kind: 'quote' | 'invoice'; id: st
         </div>
       </div>
 
-      <DocumentView doc={doc} business={business} />
+      <A4Preview>
+        <DocumentView doc={doc} business={business} />
+      </A4Preview>
     </AdminShell>
   );
 }

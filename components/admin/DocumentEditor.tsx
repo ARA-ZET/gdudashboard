@@ -89,12 +89,12 @@ export function DocumentEditor({ kind, existing }: { kind: 'quote' | 'invoice'; 
               </Field>
             </div>
             {clients.length === 0 && (
-              <p className="mt-3 text-[13px] text-ink-muted">No clients yet — <a href="/admin/clients" className="font-semibold text-navy underline decoration-gold">add one first</a>.</p>
+              <p className="mt-3 text-[12px] text-ink-muted">No clients yet — <a href="/admin/clients" className="font-semibold text-navy underline decoration-gold">add one first</a>.</p>
             )}
           </Card>
 
           <Card className="p-6">
-            <h3 className="mb-4 font-serif text-lg font-bold text-navy">Line items</h3>
+            <h3 className="mb-4 font-serif text-base font-bold text-navy">Line items</h3>
             <div className="space-y-3">
               {items.map((it, i) => (
                 <div key={i} className="grid grid-cols-12 items-start gap-2">
@@ -108,7 +108,7 @@ export function DocumentEditor({ kind, existing }: { kind: 'quote' | 'invoice'; 
                     <Input type="number" min={0} step="0.01" placeholder="Unit price" value={it.unitPrice} onChange={(e) => setItem(i, { unitPrice: parseFloat(e.target.value) || 0 })} />
                   </div>
                   <div className="col-span-3 sm:col-span-2 flex items-center justify-end gap-2 pt-2.5">
-                    <span className="text-[13px] font-semibold text-navy">{money(lineTotal(it))}</span>
+                    <span className="text-[12px] font-semibold text-navy">{money(lineTotal(it))}</span>
                     <button onClick={() => removeItem(i)} aria-label="Remove line" className="text-ink-muted hover:text-red-600"><Icon name="close" className="h-4 w-4" /></button>
                   </div>
                 </div>
@@ -118,7 +118,7 @@ export function DocumentEditor({ kind, existing }: { kind: 'quote' | 'invoice'; 
               {commonLineItems.map((s) => <option key={s} value={s} />)}
             </datalist>
             <div className="mt-4 flex flex-wrap items-center gap-3">
-              <button onClick={addItem} className="inline-flex items-center gap-2 text-[14px] font-semibold text-navy hover:text-gold-700">
+              <button onClick={addItem} className="inline-flex items-center gap-2 text-[13px] font-semibold text-navy hover:text-gold-700">
                 <Icon name="plus" className="h-4 w-4" /> Add line
               </button>
               <span className="text-outline-variant">·</span>
@@ -143,12 +143,12 @@ export function DocumentEditor({ kind, existing }: { kind: 'quote' | 'invoice'; 
 
         <div>
           <Card className="sticky top-24 p-6">
-            <h3 className="font-serif text-lg font-bold text-navy">Summary</h3>
-            <dl className="mt-4 space-y-2 text-[14px]">
+            <h3 className="font-serif text-base font-bold text-navy">Summary</h3>
+            <dl className="mt-4 space-y-2 text-[13px]">
               <div className="flex justify-between"><dt className="text-ink-muted">Subtotal</dt><dd className="font-semibold text-navy">{money(subtotal)}</dd></div>
-              <div className="flex justify-between border-t border-outline-variant/60 pt-3 text-[16px]"><dt className="font-bold text-navy">Total</dt><dd className="font-bold text-navy">{money(total)}</dd></div>
+              <div className="flex justify-between border-t border-outline-variant/60 pt-3 text-[15px]"><dt className="font-bold text-navy">Total</dt><dd className="font-bold text-navy">{money(total)}</dd></div>
             </dl>
-            <p className="mt-3 text-[12px] text-ink-muted">ZAR · VAT not applied</p>
+            <p className="mt-3 text-[11px] text-ink-muted">ZAR · VAT not applied</p>
             <Button variant="gold" onClick={save} disabled={busy} className="mt-5 w-full">{busy ? 'Saving…' : `Save ${label.toLowerCase()}`}</Button>
           </Card>
         </div>

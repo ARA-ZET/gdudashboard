@@ -54,19 +54,19 @@ export default function DashboardPage() {
         {cards.map((c) => (
           <Card key={c.label} className="p-5">
             <div className="flex items-center justify-between">
-              <span className="text-[13px] font-semibold text-ink-muted">{c.label}</span>
+              <span className="text-[12px] font-semibold text-ink-muted">{c.label}</span>
               <span className="grid h-9 w-9 place-items-center rounded-md bg-navy text-gold"><Icon name={c.icon} className="h-5 w-5" /></span>
             </div>
-            <div className="mt-3 font-serif text-2xl font-bold text-navy">{c.value}</div>
-            <div className="mt-0.5 text-[12px] text-ink-muted">{c.sub}</div>
+            <div className="mt-3 font-serif text-xl font-bold text-navy">{c.value}</div>
+            <div className="mt-0.5 text-[11px] text-ink-muted">{c.sub}</div>
           </Card>
         ))}
       </div>
 
       <div className="mt-8">
         <div className="mb-3 flex items-center justify-between">
-          <h2 className="font-serif text-lg font-bold text-navy">Recent activity</h2>
-          <Link href="/admin/invoices" className="text-[13px] font-semibold text-navy hover:text-gold-700">All invoices →</Link>
+          <h2 className="font-serif text-base font-bold text-navy">Recent activity</h2>
+          <Link href="/admin/invoices" className="text-[12px] font-semibold text-navy hover:text-gold-700">All invoices →</Link>
         </div>
         {recent.length === 0 ? (
           <Card className="p-8 text-center text-ink-muted">
@@ -80,11 +80,11 @@ export default function DashboardPage() {
                   <Icon name={d.kind === 'invoice' ? 'verified' : 'layers'} className="h-4 w-4" />
                 </span>
                 <div className="min-w-0">
-                  <div className="truncate text-[14px] font-semibold text-navy">{d.number} · {d.clientName}</div>
-                  <div className="text-[12px] capitalize text-ink-muted">{d.kind} · {d.date}</div>
+                  <div className="truncate text-[13px] font-semibold text-navy">{d.number} · {d.clientName}</div>
+                  <div className="text-[11px] capitalize text-ink-muted">{d.kind} · {d.date}</div>
                 </div>
                 <div className="ml-auto flex items-center gap-3">
-                  <span className="text-[14px] font-semibold text-navy">{money(d.total, d.currency)}</span>
+                  <span className="text-[13px] font-semibold text-navy">{money(d.total, d.currency)}</span>
                   <StatusBadge status={d.status} />
                 </div>
               </Link>

@@ -112,11 +112,26 @@
   }
 }
 
-/* A4 document sheet (on screen) */
+/* A4 document sheet.
+   Always laid out at true A4 — never reflowed to the container — so the
+   on-screen preview has exactly the line breaks, spacing and pagination the
+   printer produces. `.a4-scaler` shrinks it visually to fit the viewport;
+   scaling is not reflow, so the layout is identical at any size. */
 .a4-sheet {
   width: 210mm;
-  max-width: 100%;
+  min-height: 297mm;
   padding: 16mm;
+}
+
+/* Scaled preview: viewport clips, scaler transforms. The scale factor and the
+   viewport height are set inline by the A4Preview component. */
+.a4-viewport {
+  width: 100%;
+  overflow: hidden;
+}
+.a4-scaler {
+  width: 210mm;
+  transform-origin: top left;
 }
 
 /* Print: A4 page, show only the invoice/quote document */
@@ -135,6 +150,17 @@
     margin: 0 !important;
     padding: 16mm !important;
     box-shadow: none !important;
+  }
+  /* Drop the preview scaling when printing. This also removes the transform,
+     which would otherwise make the transformed ancestor the containing block
+     for .printable's absolute positioning and throw the page off-origin. */
+  .a4-viewport {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .a4-scaler {
+    width: auto !important;
+    transform: none !important;
   }
 }
 
