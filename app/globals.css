@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Body font */
+    --font-inter: 'Roboto', system-ui, sans-serif;
+    /* Heading / display font */
+    --font-playfair: 'Poppins', system-ui, sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-surface text-ink font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-serif text-navy;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: #feb700;
+    color: #041632;
+  }
+
+  /* Accessible focus ring in brand gold */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid #feb700;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-container px-5 md:px-8 lg:px-12;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-label text-gold-700;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply inline-block h-px w-8 bg-gold;
+  }
+  .eyebrow-light {
+    @apply text-gold-400;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-6 py-3.5 text-[14px] font-semibold tracking-wide transition-all duration-200 focus-visible:outline-gold;
+  }
+  .btn-primary {
+    @apply bg-navy text-white hover:bg-navy-800 hover:shadow-ambient;
+  }
+  .btn-gold {
+    @apply bg-gold text-navy hover:bg-gold-400 hover:shadow-ambient;
+  }
+  .btn-outline {
+    @apply border-2 border-gold text-navy hover:bg-gold hover:text-navy;
+  }
+  .btn-outline-light {
+    @apply border-2 border-white/40 text-white hover:border-gold hover:text-gold;
+  }
+  .btn-ghost {
+    @apply text-navy hover:text-gold-700 px-0;
+  }
+
+  .card {
+    @apply rounded-lg border border-outline-variant/60 bg-surface-white shadow-card;
+  }
+
+  .link-underline {
+    @apply relative inline-flex items-center gap-1.5 font-semibold text-navy;
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  /* Entrance animation — enhances first paint only; content is visible without it */
+  @media (prefers-reduced-motion: no-preference) {
+    .gd-reveal {
+      animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+  }
+  .section { @apply py-20 md:py-28 lg:py-[7.5rem]; }
+  .section-sm { @apply py-14 md:py-20; }
+  /* Subtle tufted / diamond-button texture used behind dark sections */
+  .texture-tufted {
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(255, 183, 0, 0.10) 1px, transparent 0);
+    background-size: 28px 28px;
+  }
+  .texture-weave {
+    background-image:
+      linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.03) 75%),
+      linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.03) 75%);
+    background-size: 8px 8px;
+    background-position: 0 0, 4px 4px;
+  }
+}
+
+/* A4 document sheet (on screen) */
+.a4-sheet {
+  width: 210mm;
+  max-width: 100%;
+  padding: 16mm;
+}
+
+/* Print: A4 page, show only the invoice/quote document */
+@media print {
+  @page { size: A4; margin: 0; }
+  .no-print { display: none !important; }
+  body { background: #fff !important; }
+  body * { visibility: hidden !important; }
+  .printable, .printable * { visibility: visible !important; }
+  .printable {
+    position: absolute !important;
+    left: 0;
+    top: 0;
+    width: 210mm !important;
+    min-height: 297mm !important;
+    margin: 0 !important;
+    padding: 16mm !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
