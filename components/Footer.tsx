@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { site } from '@/lib/site';
 import { services } from '@/lib/content';
 import { Logo } from './Logo';
@@ -66,10 +67,11 @@ export function Footer() {
             className="group inline-flex items-center gap-2.5 text-[11px] uppercase tracking-label text-white/35 transition-colors hover:text-white/70"
           >
             <span>Designed &amp; built by</span>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={site.developer.logoLight}
               alt={site.developer.name}
+              width={74}
+              height={20}
               className="h-5 w-auto opacity-70 transition-opacity group-hover:opacity-100"
             />
           </a>

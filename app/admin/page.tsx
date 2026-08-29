@@ -26,9 +26,12 @@ export default function DashboardPage() {
     return { outstanding, paidThisMonth, openQuotes };
   }, [invoices, quotes]);
 
-  const recent = [...invoices, ...quotes]
-    .sort((a, b) => (b.createdAt?.toMillis?.() ?? 0) - (a.createdAt?.toMillis?.() ?? 0))
-    .slice(0, 6);
+  const recent = useMemo(
+    () => [...invoices, ...quotes]
+      .sort((a, b) => (b.createdAt?.toMillis?.() ?? 0) - (a.createdAt?.toMillis?.() ?? 0))
+      .slice(0, 6),
+    [invoices, quotes],
+  );
 
   const cards = [
     { label: 'Outstanding', value: money(stats.outstanding), sub: `${invoices.filter((i) => i.status !== 'paid').length} unpaid invoice(s)`, icon: 'verified' as const },

@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState, type ReactNode } from 'react';
 import { useAuth } from './AuthProvider';
@@ -39,8 +40,7 @@ export function AdminShell({ title, actions, children }: { title: string; action
       {/* Sidebar */}
       <aside className={`no-print fixed inset-y-0 left-0 z-40 w-[260px] transform bg-navy text-white transition-transform lg:static lg:translate-x-0 ${open ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="flex h-16 items-center gap-3 border-b border-white/10 px-5">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo/gdulogo-long-gold.png" alt="Golden Diamond Upholstery" className="h-7 w-auto" />
+          <Image src="/logo/gdulogo-long-gold.png" alt="Golden Diamond Upholstery" width={131} height={28} priority className="h-7 w-auto" />
           <span className="rounded bg-gold/15 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.18em] text-gold-400">Admin</span>
         </div>
         <nav className="p-3">

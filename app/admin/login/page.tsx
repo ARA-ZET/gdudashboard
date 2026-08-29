@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { useAuth } from '@/components/admin/AuthProvider';
 import { Button, Field, Input } from '@/components/admin/ui';
 import { Icon } from '@/components/Icon';
@@ -39,8 +40,7 @@ export default function LoginPage() {
     <div className="grid min-h-screen place-items-center bg-navy p-5 texture-tufted">
       <div className="w-full max-w-sm">
         <div className="mb-6 flex flex-col items-center text-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo/gdulogo-small-gold.png" alt="Golden Diamond Upholstery" className="h-28 w-auto" />
+          <Image src="/logo/gdulogo-small-gold.png" alt="Golden Diamond Upholstery" width={154} height={112} priority className="h-28 w-auto" />
           <p className="mt-4 text-[12px] font-semibold uppercase tracking-[0.22em] text-gold-400">Admin</p>
           <p className="mt-1 text-[14px] text-white/60">Sign in to manage quotes & invoices</p>
         </div>

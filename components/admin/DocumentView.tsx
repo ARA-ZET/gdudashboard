@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import { site } from '@/lib/site';
 import { defaultBusiness } from '@/lib/business';
 import { money, lineTotal, type BusinessDoc, type BusinessSettings } from '@/lib/db';
@@ -28,8 +29,9 @@ export function DocumentView({ doc, business = {} }: { doc: BusinessDoc; busines
       {/* Header */}
       <div className="flex flex-wrap items-start justify-between gap-6 border-b-2 border-navy pb-6">
         <div>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo/gdulogo-long-dark.png" alt={name} className="h-12 w-auto" />
+          {/* `priority` matters here: a lazy image may still be unloaded when the
+              print dialog opens, which prints the document with a blank logo. */}
+          <Image src="/logo/gdulogo-long-dark.png" alt={name} width={225} height={48} priority className="h-12 w-auto" />
           <div className="mt-4 whitespace-pre-line text-[12px] leading-relaxed text-ink-muted">
             {addressLines}
             {'\n'}{phone}{email ? ` · ${email}` : ''}
@@ -123,8 +125,7 @@ export function DocumentView({ doc, business = {} }: { doc: BusinessDoc; busines
       {/* Developer credit — prints with the document, so the URL is spelled out. */}
       <div className="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[9px] uppercase tracking-wide text-ink-muted">
         <span>Designed &amp; built by</span>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={site.developer.logoDark} alt={site.developer.name} className="h-4 w-auto" />
+        <Image src={site.developer.logoDark} alt={site.developer.name} width={59} height={16} priority className="h-4 w-auto" />
         <span>{site.developer.url.replace(/^https?:\/\//, '')}</span>
       </div>
     </div>
