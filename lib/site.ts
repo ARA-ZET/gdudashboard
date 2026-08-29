@@ -55,8 +55,8 @@ export const site = {
   developer: {
     name: 'ARAZET DESIGN',
     url: 'https://arazetdesign.co.za',
-    logoDark: '/logo/arazet-long-dark.png',
-    logoLight: '/logo/arazet-long-white.png',
+    logoDark: '/logo/arazet-long-dark.webp',
+    logoLight: '/logo/arazet-long-white.webp',
   },
 
   social: {

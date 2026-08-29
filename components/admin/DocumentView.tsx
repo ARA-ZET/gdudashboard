@@ -31,7 +31,7 @@ export function DocumentView({ doc, business = {} }: { doc: BusinessDoc; busines
         <div>
           {/* `priority` matters here: a lazy image may still be unloaded when the
               print dialog opens, which prints the document with a blank logo. */}
-          <Image src="/logo/gdulogo-long-dark.png" alt={name} width={225} height={48} priority className="h-12 w-auto" />
+          <Image src="/logo/gdulogo-long-dark.webp" alt={name} width={225} height={48} priority className="h-12 w-auto" />
           <div className="mt-4 whitespace-pre-line text-[12px] leading-relaxed text-ink-muted">
             {addressLines}
             {'\n'}{phone}{email ? ` · ${email}` : ''}
