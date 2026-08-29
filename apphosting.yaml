@@ -1,0 +1,32 @@
+# Firebase App Hosting configuration
+# https://firebase.google.com/docs/app-hosting/configure
+runConfig:
+  minInstances: 0
+  maxInstances: 2
+  concurrency: 80
+  cpu: 1
+  memoryMiB: 512
+
+# Environment variables and secrets available to the running server.
+# The public site URL is used for canonical tags, sitemap and JSON-LD.
+env:
+  - variable: NEXT_PUBLIC_SITE_URL
+    value: https://goldendiamond.co.za
+    availability:
+      - BUILD
+      - RUNTIME
+
+  # --- Contact form email (Resend) ---
+  # The quote form emails each lead to CONTACT_TO when these are set.
+  # 1) Create a Resend account + API key (https://resend.com).
+  # 2) Store the key in Cloud Secret Manager, then reference it here:
+  # - variable: RESEND_API_KEY
+  #   secret: RESEND_API_KEY        # name of the secret in Secret Manager
+  #   availability: [RUNTIME]
+  - variable: CONTACT_TO
+    value: hello@goldendiamond.co.za   # where quote requests are emailed
+    availability: [RUNTIME]
+  # Once your domain is verified in Resend, set a branded from-address:
+  # - variable: CONTACT_FROM
+  #   value: Golden Diamond Website <quotes@goldendiamond.co.za>
+  #   availability: [RUNTIME]
