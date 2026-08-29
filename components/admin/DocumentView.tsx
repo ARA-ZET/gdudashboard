@@ -119,6 +119,14 @@ export function DocumentView({ doc, business = {} }: { doc: BusinessDoc; busines
       <div className="mt-8 border-t border-outline-variant/60 pt-4 text-center text-[11px] text-ink-muted">
         Thank you for choosing {name}. {isQuote ? 'This quote is subject to our standard terms.' : 'Please use the invoice number as your payment reference.'}
       </div>
+
+      {/* Developer credit — prints with the document, so the URL is spelled out. */}
+      <div className="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[9px] uppercase tracking-wide text-ink-muted">
+        <span>Designed &amp; built by</span>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={site.developer.logoDark} alt={site.developer.name} className="h-4 w-auto" />
+        <span>{site.developer.url.replace(/^https?:\/\//, '')}</span>
+      </div>
     </div>
   );
 }

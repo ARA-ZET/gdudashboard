@@ -57,6 +57,23 @@ export function Footer() {
           <p>© {year} {site.name}. All rights reserved. Crafted for excellence.</p>
           <p>Reupholstery · Repairs · Bespoke · Restoration — Cape Town</p>
         </div>
+
+        <div className="mt-8 flex justify-center sm:justify-end">
+          <a
+            href={site.developer.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-2.5 text-[11px] uppercase tracking-label text-white/35 transition-colors hover:text-white/70"
+          >
+            <span>Designed &amp; built by</span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={site.developer.logoLight}
+              alt={site.developer.name}
+              className="h-5 w-auto opacity-70 transition-opacity group-hover:opacity-100"
+            />
+          </a>
+        </div>
       </div>
     </footer>
   );

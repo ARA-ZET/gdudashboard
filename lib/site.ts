@@ -46,6 +46,19 @@ export const site = {
     ],
   },
 
+  /**
+   * The studio that designed and built this site. Credited in the site footer
+   * and on quote/invoice documents.
+   * `logoDark` is the dark artwork for light surfaces; `logoLight` is the white
+   * artwork for dark surfaces.
+   */
+  developer: {
+    name: 'ARAZET DESIGN',
+    url: 'https://arazetdesign.co.za',
+    logoDark: '/logo/arazet-long-dark.png',
+    logoLight: '/logo/arazet-long-white.png',
+  },
+
   social: {
     facebook: 'https://facebook.com/', // PLACEHOLDER
     instagram: 'https://instagram.com/', // PLACEHOLDER
