@@ -53,10 +53,13 @@ const config: Config = {
         body: ['var(--font-inter)', 'Roboto', 'system-ui', 'sans-serif'],
       },
       fontSize: {
-        'display': ['clamp(2.75rem, 6vw, 4rem)', { lineHeight: '1.05', letterSpacing: '-0.02em', fontWeight: '700' }],
-        'h1': ['clamp(2.25rem, 4.5vw, 3rem)', { lineHeight: '1.1', fontWeight: '700' }],
-        'h2': ['clamp(1.75rem, 3vw, 2.25rem)', { lineHeight: '1.15', fontWeight: '600' }],
-        'h3': ['1.5rem', { lineHeight: '2rem', fontWeight: '600' }],
+        // The vw term only overtakes the floor on a wide screen, so the FLOOR is
+        // what phones actually get. The old floors (display 2.75rem/44px) were
+        // desktop sizes on a 390px screen and overflowed the viewport.
+        'display': ['clamp(2rem, 7vw, 4rem)', { lineHeight: '1.08', letterSpacing: '-0.02em', fontWeight: '700' }],
+        'h1': ['clamp(1.75rem, 5vw, 3rem)', { lineHeight: '1.12', fontWeight: '700' }],
+        'h2': ['clamp(1.375rem, 3.5vw, 2.25rem)', { lineHeight: '1.2', fontWeight: '600' }],
+        'h3': ['clamp(1.125rem, 2.2vw, 1.5rem)', { lineHeight: '1.4', fontWeight: '600' }],
       },
       borderRadius: {
         DEFAULT: '0.125rem',

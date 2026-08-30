@@ -65,7 +65,7 @@ export default function PortfolioPage() {
                         <span className="absolute left-3 top-3 rounded bg-navy/90 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-label text-gold">{p.category}</span>
                       </div>
                       <div className="flex flex-1 flex-col p-6">
-                        <h3 className="text-lg font-semibold text-navy">{p.title}</h3>
+                        <h3 className="text-base md:text-lg font-semibold text-navy">{p.title}</h3>
                         <p className="mt-2 flex-1 text-[14px] leading-relaxed text-ink-muted">{p.summary}</p>
                         <div className="mt-5 border-t border-outline-variant/60 pt-4">
                           <div className="text-[11px] font-semibold uppercase tracking-label text-gold-700">Materials</div>

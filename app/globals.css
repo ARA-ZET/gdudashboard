@@ -23,6 +23,9 @@
   h1, h2, h3, h4 {
     @apply font-serif text-navy;
     text-wrap: balance;
+    /* A single long word at display size is wider than a phone screen, and one
+       overflowing heading gives the whole page a horizontal scrollbar. */
+    overflow-wrap: break-word;
   }
 
   ::selection {
@@ -47,8 +50,10 @@
     @apply mx-auto w-full max-w-container px-5 md:px-8 lg:px-12;
   }
 
+  /* flex-wrap so a long eyebrow ("Cape Town's premier upholstery atelier") can
+     break onto a second line on a phone instead of running off the screen. */
   .eyebrow {
-    @apply inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-label text-gold-700;
+    @apply inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-semibold uppercase tracking-label text-gold-700 md:text-[13px];
   }
   .eyebrow::before {
     content: '';
@@ -60,7 +65,7 @@
 
   /* Buttons */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-md px-6 py-3.5 text-[14px] font-semibold tracking-wide transition-all duration-200 focus-visible:outline-gold;
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-[13px] font-semibold tracking-wide transition-all duration-200 focus-visible:outline-gold md:px-6 md:py-3.5 md:text-[14px];
   }
   .btn-primary {
     @apply bg-navy text-white hover:bg-navy-800 hover:shadow-ambient;

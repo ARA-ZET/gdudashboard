@@ -52,7 +52,7 @@ export default function ResidentialPage() {
             {offerings.map((o, i) => (
               <Reveal key={o.t} delay={i * 70} className="card p-7">
                 <span className="grid h-12 w-12 place-items-center rounded-md bg-navy text-gold"><Icon name={o.icon as any} className="h-6 w-6" /></span>
-                <h3 className="mt-5 text-lg font-semibold text-navy">{o.t}</h3>
+                <h3 className="mt-5 text-base md:text-lg font-semibold text-navy">{o.t}</h3>
                 <p className="mt-2 text-[15px] leading-relaxed text-ink-muted">{o.d}</p>
               </Reveal>
             ))}

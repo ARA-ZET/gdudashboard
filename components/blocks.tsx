@@ -52,7 +52,7 @@ export function PageHero({
         <Reveal>
           <Eyebrow light>{eyebrow}</Eyebrow>
           <h1 className="mt-5 max-w-4xl text-display !text-white">{title}</h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/75">{intro}</p>
+          <p className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-white/75">{intro}</p>
           {children && <div className="mt-9 flex flex-wrap items-center gap-4">{children}</div>}
         </Reveal>
       </div>
@@ -101,7 +101,7 @@ export function TrustPillars() {
           <span className="grid h-12 w-12 place-items-center rounded-md bg-navy text-gold">
             <Icon name={p.icon as IconName} className="h-6 w-6" />
           </span>
-          <h3 className="mt-5 text-lg font-semibold text-navy">{p.title}</h3>
+          <h3 className="mt-5 text-base md:text-lg font-semibold text-navy">{p.title}</h3>
           <p className="mt-2 text-[15px] leading-relaxed text-ink-muted">{p.body}</p>
         </Reveal>
       ))}
@@ -115,10 +115,10 @@ export function ProcessSteps({ light = false }: { light?: boolean }) {
       {processSteps.map((step, i) => (
         <Reveal key={step.title} delay={i * 90}>
           <div className="flex items-center gap-4">
-            <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-full font-serif text-lg font-bold ${light ? 'bg-gold text-navy' : 'bg-navy text-gold'}`}>{i + 1}</span>
+            <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-full font-serif text-base md:text-lg font-bold ${light ? 'bg-gold text-navy' : 'bg-navy text-gold'}`}>{i + 1}</span>
             <span className={`h-px flex-1 ${light ? 'bg-white/15' : 'bg-outline-variant'}`} />
           </div>
-          <h3 className={`mt-5 text-lg font-semibold ${light ? 'text-white' : 'text-navy'}`}>{step.title}</h3>
+          <h3 className={`mt-5 text-base md:text-lg font-semibold ${light ? 'text-white' : 'text-navy'}`}>{step.title}</h3>
           <p className={`mt-2 text-[15px] leading-relaxed ${light ? 'text-white/65' : 'text-ink-muted'}`}>{step.body}</p>
         </Reveal>
       ))}
@@ -132,7 +132,7 @@ export function Testimonials() {
       {testimonials.map((t, i) => (
         <Reveal key={i} delay={i * 90} className="card flex flex-col p-8">
           <Icon name="quote" className="h-8 w-8 text-gold" />
-          <blockquote className="mt-4 flex-1 font-serif text-xl leading-relaxed text-navy">“{t.quote}”</blockquote>
+          <blockquote className="mt-4 flex-1 font-serif text-lg md:text-xl leading-relaxed text-navy">“{t.quote}”</blockquote>
           <div className="mt-6 flex items-center gap-3 border-t border-outline-variant/60 pt-5">
             <span className="grid h-10 w-10 place-items-center rounded-full bg-navy text-[13px] font-bold text-gold">
               {t.name.split(' ').map((w) => w[0]).join('').slice(0, 2)}
@@ -165,7 +165,7 @@ export function QuoteCTA({
       <div className="container-x relative py-20 text-center md:py-24">
         <Reveal>
           <h2 className="mx-auto max-w-3xl text-h2 !text-white">{title}</h2>
-          <p className="mx-auto mt-5 max-w-2xl text-lg text-white/70">{intro}</p>
+          <p className="mx-auto mt-5 max-w-2xl text-base md:text-lg text-white/70">{intro}</p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
             <Link href="/contact" className="btn btn-gold">Get a Free Quote <Icon name="arrow" className="h-4 w-4" /></Link>
             <a href={`tel:${site.contact.phoneHref}`} className="btn btn-outline-light">

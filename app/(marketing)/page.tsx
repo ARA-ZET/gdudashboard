@@ -37,7 +37,7 @@ export default function HomePage() {
             <h1 className="mt-5 text-display !text-white">
               Masterful upholstery for <span className="text-gold">home &amp; hospitality</span>
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/75">
+            <p className="mt-6 max-w-xl text-base md:text-lg leading-relaxed text-white/75">
               Expert reupholstery, repairs and bespoke furniture — where heritage craftsmanship meets modern durability. Serving discerning homes and businesses across the Western Cape since {site.foundedYear}.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -104,7 +104,7 @@ export default function HomePage() {
                 <Photo id={photos.armchairDetail} variant="rust" alt="Restored heritage armchair in the Golden Diamond Cape Town atelier" className="aspect-[5/4] w-full" />
               </div>
               <div className="absolute -right-5 -top-5 hidden rounded-lg bg-surface-white p-5 text-navy shadow-ambient-lg sm:block">
-                <div className="max-w-[13rem] font-serif text-lg italic leading-snug">“Craftsmanship is not a technique — it is a devotion.”</div>
+                <div className="max-w-[13rem] font-serif text-base md:text-lg italic leading-snug">“Craftsmanship is not a technique — it is a devotion.”</div>
               </div>
             </Reveal>
             <div className="order-1 lg:order-2">
@@ -177,7 +177,7 @@ export default function HomePage() {
                   <span className="absolute left-3 top-3 rounded bg-navy/90 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-label text-gold">{p.c}</span>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-lg font-semibold text-navy">{p.t}</h3>
+                  <h3 className="text-base md:text-lg font-semibold text-navy">{p.t}</h3>
                   <p className="mt-2 text-[14px] leading-relaxed text-ink-muted">{p.d}</p>
                 </div>
               </Reveal>

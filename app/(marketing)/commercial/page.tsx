@@ -100,10 +100,10 @@ export default function CommercialPage() {
             ].map((step, i) => (
               <Reveal key={step.t} delay={i * 80}>
                 <div className="flex items-center gap-4">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-navy font-serif text-lg font-bold text-gold">{i + 1}</span>
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-navy font-serif text-base md:text-lg font-bold text-gold">{i + 1}</span>
                   <span className="h-px flex-1 bg-outline-variant" />
                 </div>
-                <h3 className="mt-5 text-lg font-semibold text-navy">{step.t}</h3>
+                <h3 className="mt-5 text-base md:text-lg font-semibold text-navy">{step.t}</h3>
                 <p className="mt-2 text-[15px] leading-relaxed text-ink-muted">{step.d}</p>
               </Reveal>
             ))}
