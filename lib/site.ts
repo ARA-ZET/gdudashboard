@@ -11,9 +11,25 @@
 export const site = {
   name: 'Golden Diamond Upholstery',
   shortName: 'Golden Diamond',
-  tagline: "Cape Town's premier bespoke upholstery & repair atelier",
+  tagline: 'Reupholstery, repairs & custom furniture in Cape Town',
+
+  /**
+   * SEO title for the home page. Kept under ~60 characters so Google shows it
+   * whole, and led by the phrase people actually search ("upholstery Cape
+   * Town") rather than by the brand, which nobody is searching for yet.
+   */
+  seoTitle: 'Upholstery Cape Town | Reupholstery & Repairs | Golden Diamond',
+
+  /**
+   * Meta description — under ~155 characters so it is not truncated in results.
+   * Names the service, the place, and the reason to click.
+   */
+  metaDescription:
+    'Expert reupholstery, upholstery repair and custom furniture in Cape Town. Free quotes, free home visits, collection and delivery across the Cape.',
+
+  /** Longer prose description — used for schema.org and the web app manifest. */
   description:
-    'Golden Diamond Upholstery is a Cape Town atelier specialising in expert reupholstery, upholstery repair, bespoke furniture and heritage restoration for homes and businesses across the Western Cape.',
+    'Golden Diamond Upholstery is a Cape Town upholstery workshop specialising in reupholstery, upholstery repair, custom headboards, loose covers, antique restoration and custom furniture for homes and businesses across the Western Cape.',
   foundedYear: 2004, // PLACEHOLDER — confirm your real founding year
   // The canonical site URL. Overridden at build/runtime by NEXT_PUBLIC_SITE_URL.
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://goldendiamondupholstery.co.za',
@@ -85,10 +101,18 @@ export const site = {
 
   // Suburbs & areas served — used for local SEO copy and schema areaServed.
   serviceAreas: [
-    'Constantia', 'Bishopscourt', 'Newlands', 'Claremont', 'Kenilworth', 'Wynberg',
-    'Rondebosch', 'Bergvliet', 'Tokai', 'Sea Point', 'Green Point', 'City Bowl',
-    'Camps Bay', 'Clifton', 'Hout Bay', 'Milnerton', 'Century City', 'Table View',
-    'Durbanville', 'Bellville', 'Somerset West', 'Stellenbosch',
+    // Local catchment first — the workshop is in Khayelitsha, and these are the
+    // nearest searches, so they are both the most winnable and the cheapest to serve.
+    'Khayelitsha', 'Mitchells Plain', 'Mfuleni', 'Delft', 'Blue Downs', 'Eerste River',
+    'Strand', 'Gordon\u2019s Bay', 'Somerset West', 'Kuils River', 'Brackenfell',
+    // Southern Suburbs
+    'Wynberg', 'Claremont', 'Kenilworth', 'Rondebosch', 'Newlands', 'Constantia',
+    'Bergvliet', 'Tokai', 'Plumstead', 'Diep River', 'Muizenberg', 'Athlone',
+    // City Bowl & Atlantic Seaboard
+    'City Bowl', 'Woodstock', 'Observatory', 'Sea Point', 'Green Point', 'Camps Bay', 'Hout Bay',
+    // Northern Suburbs & beyond
+    'Pinelands', 'Goodwood', 'Parow', 'Bellville', 'Durbanville', 'Milnerton',
+    'Century City', 'Table View', 'Kraaifontein', 'Stellenbosch',
   ],
 } as const;
 

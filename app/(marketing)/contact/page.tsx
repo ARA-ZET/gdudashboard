@@ -3,6 +3,7 @@ import { site } from '@/lib/site';
 import { faqs } from '@/lib/content';
 import { pageMeta, breadcrumbSchema, faqSchema } from '@/lib/seo';
 import { Icon } from '@/components/Icon';
+import { WhatsAppButton, whatsappHref } from '@/components/WhatsAppButton';
 import { Reveal } from '@/components/Reveal';
 import { JsonLd } from '@/components/JsonLd';
 import { FAQ } from '@/components/FAQ';
@@ -13,8 +14,7 @@ export const metadata: Metadata = pageMeta({
   title: 'Contact & Free Quote',
   path: '/contact',
   description:
-    'Get a free upholstery quote in Cape Town. Call, WhatsApp or send us photos of your piece for a fast estimate — or book an in-home assessment. Golden Diamond Upholstery, serving the Western Cape.',
-  keywords: ['upholstery quote Cape Town', 'upholstery contact', 'free upholstery quote'],
+    'Get a free upholstery quote in Cape Town. Call or WhatsApp us, or send photos of your furniture for a fast estimate. Free home visits across the Cape.',
 });
 
 export default function ContactPage() {
@@ -29,7 +29,12 @@ export default function ContactPage() {
         eyebrow="Get in touch"
         title={<>Begin your <span className="text-gold">free quote</span></>}
         intro="Tell us about your piece and our team will guide you from fabric to finish. Prefer to talk? Call or WhatsApp us directly — we’re happy to help."
-      />
+      >
+        <WhatsAppButton context="Contact page hero" />
+        <a href={`tel:${site.contact.phoneHref}`} className="btn btn-outline-light">
+          <Icon name="phone" className="h-4 w-4" /> {site.contact.phone}
+        </a>
+      </PageHero>
       <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }]} />
 
       <section className="section">
@@ -38,6 +43,13 @@ export default function ContactPage() {
           <div>
             <SectionHeading eyebrow="Request a quote" title="Send us the details" intro="The more you tell us, the more accurate your estimate. Fields marked are required." />
             <div className="mt-8"><ContactForm /></div>
+            <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-outline-variant/60 pt-6">
+              <span className="text-[14px] text-ink-muted">Prefer to chat?</span>
+              <WhatsAppButton context="Contact page" />
+              <a href={`tel:${site.contact.phoneHref}`} className="btn btn-outline">
+                <Icon name="phone" className="h-4 w-4" /> {site.contact.phone}
+              </a>
+            </div>
           </div>
 
           {/* DIRECT CONTACT */}
@@ -48,7 +60,7 @@ export default function ContactPage() {
                 <li className="flex gap-4">
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-navy text-gold"><Icon name="pin" className="h-5 w-5" /></span>
                   <div>
-                    <div className="text-[13px] font-semibold uppercase tracking-label text-gold-700">Atelier</div>
+                    <div className="text-[13px] font-semibold uppercase tracking-label text-gold-700">Workshop</div>
                     <div className="mt-1 text-[15px] text-navy">{site.contact.address.street}<br />{site.contact.address.area}, {site.contact.address.postalCode}</div>
                   </div>
                 </li>
@@ -70,7 +82,7 @@ export default function ContactPage() {
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-navy text-gold"><Icon name="whatsapp" className="h-5 w-5" /></span>
                   <div>
                     <div className="text-[13px] font-semibold uppercase tracking-label text-gold-700">WhatsApp</div>
-                    <a href={`https://wa.me/${site.contact.whatsappHref}`} className="mt-1 block text-[15px] text-navy hover:text-gold-700">Message us</a>
+                    <a href={whatsappHref('Contact page')} target="_blank" rel="noopener noreferrer" className="mt-1 block text-[15px] text-navy hover:text-gold-700">Message us</a>
                   </div>
                 </li>
               </ul>

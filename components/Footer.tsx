@@ -4,6 +4,7 @@ import { site } from '@/lib/site';
 import { services } from '@/lib/content';
 import { Logo } from './Logo';
 import { Icon } from './Icon';
+import { whatsappHref } from './WhatsAppButton';
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -14,12 +15,12 @@ export function Footer() {
           <div className="lg:col-span-4">
             <Logo light />
             <p className="mt-5 max-w-xs text-[15px] leading-relaxed text-white/60">
-              Expert reupholstery, repair and bespoke furniture for homes and businesses across Cape Town and the Western Cape. Crafted for excellence since {site.foundedYear}.
+              Expert reupholstery, repair and custom furniture for homes and businesses across Cape Town and the Western Cape. Crafted for excellence since {site.foundedYear}.
             </p>
             <div className="mt-6 flex items-center gap-3">
               <a href={site.social.facebook} aria-label="Facebook" className="grid h-10 w-10 place-items-center rounded-md border border-white/15 hover:border-gold hover:text-gold transition-colors"><Icon name="facebook" className="h-4 w-4" /></a>
               <a href={site.social.instagram} aria-label="Instagram" className="grid h-10 w-10 place-items-center rounded-md border border-white/15 hover:border-gold hover:text-gold transition-colors"><Icon name="instagram" className="h-4 w-4" /></a>
-              <a href={`https://wa.me/${site.contact.whatsappHref}`} aria-label="WhatsApp" className="grid h-10 w-10 place-items-center rounded-md border border-white/15 hover:border-gold hover:text-gold transition-colors"><Icon name="whatsapp" className="h-4 w-4" /></a>
+              <a href={whatsappHref('site footer')} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="grid h-10 w-10 place-items-center rounded-md border border-white/15 hover:border-gold hover:text-gold transition-colors"><Icon name="whatsapp" className="h-4 w-4" /></a>
             </div>
           </div>
 
@@ -44,7 +45,7 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-3">
-            <h3 className="text-[12px] font-semibold uppercase tracking-label text-gold-400">Visit the Atelier</h3>
+            <h3 className="text-[12px] font-semibold uppercase tracking-label text-gold-400">Visit the Workshop</h3>
             <ul className="mt-5 space-y-4 text-[15px]">
               <li className="flex gap-3"><Icon name="pin" className="mt-0.5 h-4 w-4 shrink-0 text-gold" /><span>{site.contact.address.street}, {site.contact.address.area}, {site.contact.address.postalCode}</span></li>
               <li className="flex gap-3"><Icon name="phone" className="mt-0.5 h-4 w-4 shrink-0 text-gold" /><a href={`tel:${site.contact.phoneHref}`} className="hover:text-white">{site.contact.phone}</a></li>
@@ -56,7 +57,7 @@ export function Footer() {
 
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 text-[13px] text-white/45 sm:flex-row sm:items-center">
           <p>© {year} {site.name}. All rights reserved. Crafted for excellence.</p>
-          <p>Reupholstery · Repairs · Bespoke · Restoration — Cape Town</p>
+          <p>Reupholstery · Repairs · Custom-made · Restoration — Cape Town</p>
         </div>
 
         <div className="mt-8 flex justify-center sm:justify-end">

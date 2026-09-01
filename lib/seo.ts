@@ -5,21 +5,18 @@ type PageMetaInput = {
   title: string;
   description: string;
   path: string; // e.g. '/services'
-  keywords?: string[];
 };
 
 /** Build consistent per-page metadata (title, canonical, Open Graph, Twitter). */
-export function pageMeta({ title, description, path, keywords }: PageMetaInput): Metadata {
+export function pageMeta({ title, description, path }: PageMetaInput): Metadata {
   const url = `${site.url}${path === '/' ? '' : path}`;
   // Home uses an absolute title (bypasses the layout template); inner pages pass
   // the bare page title and let the root template append the brand exactly once.
-  const titleField =
-    path === '/' ? { absolute: `${site.name} | ${site.tagline}` } : title;
-  const ogTitle = path === '/' ? `${site.name} | ${site.tagline}` : `${title} | ${site.name}`;
+  const titleField = path === '/' ? { absolute: site.seoTitle } : title;
+  const ogTitle = path === '/' ? site.seoTitle : `${title} | ${site.name}`;
   return {
     title: titleField,
     description,
-    keywords,
     alternates: { canonical: url },
     openGraph: {
       type: 'website',
@@ -53,8 +50,7 @@ export function localBusinessSchema() {
     telephone: contact.phone,
     email: contact.email,
     image: `${site.url}/images/og.png`,
-    logo: `${site.url}/images/logo.png`,
-    priceRange: 'R–RRRR',
+    logo: `${site.url}/logo/gdulogo-long-dark.png`,
     foundingDate: String(site.foundedYear),
     address: {
       '@type': 'PostalAddress',
@@ -75,11 +71,11 @@ export function localBusinessSchema() {
       opens: h.opens,
       closes: h.closes,
     })),
-    areaServed: site.serviceAreas.map((a) => ({ '@type': 'City', name: `${a}, Cape Town` })),
+    areaServed: site.serviceAreas.map((a) => ({ '@type': 'Place', name: `${a}, Western Cape, South Africa` })),
     sameAs: [site.social.facebook, site.social.instagram, site.social.google].filter(Boolean),
     knowsAbout: [
       'Reupholstery', 'Upholstery repair', 'Furniture restoration',
-      'Bespoke furniture', 'Antique restoration', 'Commercial upholstery',
+      'Custom furniture', 'Antique restoration', 'Commercial upholstery',
     ],
   };
 }

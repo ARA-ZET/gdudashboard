@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { site } from '@/lib/site';
 import { pageMeta, breadcrumbSchema, serviceSchema } from '@/lib/seo';
 import { Icon } from '@/components/Icon';
+import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { Reveal } from '@/components/Reveal';
 import { Photo } from '@/components/Photo';
 import { photos } from '@/lib/photos';
@@ -13,8 +14,7 @@ export const metadata: Metadata = pageMeta({
   title: 'Commercial & Contract Upholstery',
   path: '/commercial',
   description:
-    'Contract-grade commercial upholstery in Cape Town for hotels, restaurants, bars, offices and venues. High-traffic durability, fire-retardant fabrics, scaled production and on-site installation.',
-  keywords: ['commercial upholstery Cape Town', 'contract upholstery', 'restaurant banquette seating', 'hotel furniture refit', 'office chair reupholstery'],
+    'Contract upholstery for Cape Town hotels, restaurants, bars and offices. Hard-wearing fabrics, volume production and on-site installation. Request a quote.',
 });
 
 const standards = [
@@ -44,6 +44,7 @@ export default function CommercialPage() {
         intro="High-performance upholstery for Cape Town’s leading hotels, restaurants and vineyards — unmatched high-traffic durability for tourism-heavy venues, without compromising on finish."
       >
         <Link href="/contact" className="btn btn-gold">Discuss Your Project <Icon name="arrow" className="h-4 w-4" /></Link>
+        <WhatsAppButton context="Commercial page" intent="I’d like to discuss a commercial upholstery project." />
         <Link href="/portfolio" className="btn btn-outline-light">View case studies</Link>
       </PageHero>
       <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Commercial', path: '/commercial' }]} />
@@ -112,6 +113,7 @@ export default function CommercialPage() {
       </section>
 
       <QuoteCTA
+        context="Commercial page"
         title="Transform your commercial space"
         intro="Whether it’s a multi-floor hotel refit or a flagship tasting room, our commercial team will manage it from prototype to installation."
       />

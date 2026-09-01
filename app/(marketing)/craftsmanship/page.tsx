@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { pageMeta, breadcrumbSchema } from '@/lib/seo';
 import { Icon } from '@/components/Icon';
+import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { Reveal } from '@/components/Reveal';
 import { Photo } from '@/components/Photo';
 import { photos } from '@/lib/photos';
@@ -9,11 +10,10 @@ import { JsonLd } from '@/components/JsonLd';
 import { PageHero, Breadcrumbs, SectionHeading, StatsBand, QuoteCTA } from '@/components/blocks';
 
 export const metadata: Metadata = pageMeta({
-  title: 'Craftsmanship & Durability',
+  title: 'Craftsmanship & Materials',
   path: '/craftsmanship',
   description:
-    'The techniques behind Golden Diamond Upholstery: kiln-dried hardwood frames, 8-way hand-tied springs, 100k+ double-rub fabrics and master hand-finishing — heritage methods meeting modern durability in Cape Town.',
-  keywords: ['upholstery craftsmanship', '8-way hand-tied springs', 'kiln-dried hardwood frame', 'durable upholstery Cape Town'],
+    'How we build: kiln-dried hardwood frames, 8-way hand-tied springs and hard-wearing fabrics. The methods behind our upholstery work in Cape Town.',
 });
 
 const pillars = [
@@ -67,6 +67,7 @@ export default function CraftsmanshipPage() {
         intro="Every Golden Diamond piece is engineered from the frame out — traditional methods, scientifically tested materials and master hand-finishing that together earn our lifetime frame guarantee."
       >
         <Link href="/contact" className="btn btn-gold">Commission a Piece <Icon name="arrow" className="h-4 w-4" /></Link>
+        <WhatsAppButton context="Craftsmanship page" intent="I’d like to commission a piece." />
       </PageHero>
       <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Craftsmanship', path: '/craftsmanship' }]} />
 
@@ -112,7 +113,7 @@ export default function CraftsmanshipPage() {
             <span className="grid h-12 w-12 place-items-center rounded-md bg-navy text-gold"><Icon name="crown" className="h-6 w-6" /></span>
             <h3 className="mt-5 text-h3">Meet the artisans</h3>
             <p className="mt-3 text-[15px] leading-relaxed text-ink-muted">
-              Behind every bespoke piece is a team of dedicated South African craftspeople. Many of our master upholsterers come from families with deep roots in the Cape’s furniture-making heritage, passing down specialised techniques over decades — precision and passion in equal measure.
+              Behind every custom piece is a team of dedicated South African craftspeople. Many of our master upholsterers come from families with deep roots in the Cape’s furniture-making heritage, passing down specialised techniques over decades — precision and passion in equal measure.
             </p>
           </Reveal>
           <Reveal delay={100} className="card p-8">
@@ -125,7 +126,7 @@ export default function CraftsmanshipPage() {
         </div>
       </section>
 
-      <QuoteCTA />
+      <QuoteCTA context="Craftsmanship page" />
     </>
   );
 }

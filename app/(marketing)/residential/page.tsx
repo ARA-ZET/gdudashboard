@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { site } from '@/lib/site';
+import { hasTestimonials } from '@/lib/content';
 import { pageMeta, breadcrumbSchema, serviceSchema } from '@/lib/seo';
 import { Icon } from '@/components/Icon';
+import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { Reveal } from '@/components/Reveal';
 import { Photo } from '@/components/Photo';
 import { photos } from '@/lib/photos';
@@ -10,11 +12,10 @@ import { JsonLd } from '@/components/JsonLd';
 import { PageHero, Breadcrumbs, SectionHeading, ProcessSteps, Testimonials, QuoteCTA } from '@/components/blocks';
 
 export const metadata: Metadata = pageMeta({
-  title: 'Residential Upholstery',
+  title: 'Residential Upholstery Cape Town',
   path: '/residential',
   description:
-    'Residential upholstery in Cape Town — reupholster your couch, restore an heirloom, or commission a bespoke headboard. Free home visits, premium fabrics and white-glove delivery across the Cape.',
-  keywords: ['residential upholstery Cape Town', 'couch reupholstery', 'reupholster sofa', 'home furniture restoration'],
+    'Reupholster your couch, sofa, armchair or dining chairs in Cape Town. Free home visits, premium fabrics, collection and delivery. Get a free quote today.',
 });
 
 const offerings = [
@@ -31,15 +32,16 @@ export default function ResidentialPage() {
     <>
       <JsonLd data={[
         breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Residential', path: '/residential' }]),
-        serviceSchema('Residential Upholstery', 'Reupholstery, repair and bespoke furniture for Cape Town homes.', '/residential'),
+        serviceSchema('Residential Upholstery', 'Reupholstery, repair and custom furniture for Cape Town homes.', '/residential'),
       ]} />
 
       <PageHero
         eyebrow="For the Cape home"
         title={<>Elevating <span className="text-gold">Cape elegance</span>, one room at a time</>}
-        intro="Transforming South African homes through masterful bespoke creations and meticulous heritage restoration — turning the furniture you love into pieces of enduring, everyday luxury."
+        intro="We reupholster and repair the furniture in Cape Town homes, build custom headboards and seating to order, and restore family pieces that are worth keeping."
       >
         <Link href="/contact" className="btn btn-gold">Book a Free Home Visit <Icon name="arrow" className="h-4 w-4" /></Link>
+        <WhatsAppButton context="Residential page" intent="I’d like a quote for furniture in my home." />
         <Link href="/portfolio" className="btn btn-outline-light">See residential work</Link>
       </PageHero>
       <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Residential', path: '/residential' }]} />
@@ -85,15 +87,17 @@ export default function ResidentialPage() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className="section-sm bg-surface-dim">
-        <div className="container-x">
-          <SectionHeading center eyebrow="Homeowner stories" title="Loved by Cape Town homes" />
-          <div className="mt-12"><Testimonials /></div>
-        </div>
-      </section>
+      {/* TESTIMONIALS — hidden until at least one genuine review is added. */}
+      {hasTestimonials && (
+        <section className="section-sm bg-surface-dim">
+          <div className="container-x">
+            <SectionHeading center eyebrow="Homeowner stories" title="Loved by Cape Town homes" />
+            <div className="mt-12"><Testimonials /></div>
+          </div>
+        </section>
+      )}
 
-      <QuoteCTA title="Ready to refresh your home?" intro="Book a free in-home assessment anywhere in Cape Town. We’ll bring fabric samples and honest advice." />
+      <QuoteCTA context="Residential page" title="Ready to refresh your home?" intro="Book a free in-home assessment anywhere in Cape Town. We’ll bring fabric samples and honest advice." />
     </>
   );
 }

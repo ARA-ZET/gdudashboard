@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { site } from '@/lib/site';
-import { processSteps, trustPillars, testimonials, type Service } from '@/lib/content';
+import { processSteps, trustPillars, publishedTestimonials, type Service } from '@/lib/content';
 import { Icon, type IconName } from './Icon';
 import { Reveal } from './Reveal';
 import { Swatch } from './Swatch';
+import { ReviewCarousel } from './ReviewCarousel';
+import { WhatsAppButton } from './WhatsAppButton';
 
 export function Eyebrow({ children, light = false }: { children: ReactNode; light?: boolean }) {
   return <span className={`eyebrow ${light ? 'eyebrow-light' : ''}`}>{children}</span>;
@@ -127,36 +129,18 @@ export function ProcessSteps({ light = false }: { light?: boolean }) {
 }
 
 export function Testimonials() {
-  return (
-    <div className="grid gap-6 lg:grid-cols-3">
-      {testimonials.map((t, i) => (
-        <Reveal key={i} delay={i * 90} className="card flex flex-col p-8">
-          <Icon name="quote" className="h-8 w-8 text-gold" />
-          <blockquote className="mt-4 flex-1 font-serif text-lg md:text-xl leading-relaxed text-navy">“{t.quote}”</blockquote>
-          <div className="mt-6 flex items-center gap-3 border-t border-outline-variant/60 pt-5">
-            <span className="grid h-10 w-10 place-items-center rounded-full bg-navy text-[13px] font-bold text-gold">
-              {t.name.split(' ').map((w) => w[0]).join('').slice(0, 2)}
-            </span>
-            <div>
-              <div className="text-[14px] font-semibold text-navy">{t.name}</div>
-              <div className="text-[12px] text-ink-muted">{t.role}</div>
-            </div>
-            <span className="ml-auto inline-flex items-center gap-1 text-gold">
-              {Array.from({ length: 5 }).map((_, s) => <Icon key={s} name="star" className="h-3.5 w-3.5 fill-gold" />)}
-            </span>
-          </div>
-        </Reveal>
-      ))}
-    </div>
-  );
+  return <ReviewCarousel reviews={publishedTestimonials} />;
 }
 
 export function QuoteCTA({
   title = 'Ready to bring your furniture back to life?',
   intro = 'Book a free, no-obligation quote or in-home assessment anywhere in Cape Town. Our master upholsterers will guide you from fabric to finish.',
+  context = 'quote section',
 }: {
   title?: string;
   intro?: string;
+  /** Names this CTA in the prefilled WhatsApp message, e.g. 'Commercial page'. */
+  context?: string;
 }) {
   return (
     <section className="relative overflow-hidden bg-navy text-white">
@@ -168,6 +152,7 @@ export function QuoteCTA({
           <p className="mx-auto mt-5 max-w-2xl text-base md:text-lg text-white/70">{intro}</p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
             <Link href="/contact" className="btn btn-gold">Get a Free Quote <Icon name="arrow" className="h-4 w-4" /></Link>
+            <WhatsAppButton context={context} />
             <a href={`tel:${site.contact.phoneHref}`} className="btn btn-outline-light">
               <Icon name="phone" className="h-4 w-4" /> {site.contact.phone}
             </a>

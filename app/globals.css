@@ -73,6 +73,11 @@
   .btn-gold {
     @apply bg-gold text-navy hover:bg-gold-400 hover:shadow-ambient;
   }
+  /* WhatsApp green with navy text. White-on-green is the brand's own pairing but
+     only reaches 2:1 contrast; navy on this green measures ~9:1. */
+  .btn-whatsapp {
+    @apply bg-[#25D366] text-navy hover:bg-[#1DA851] hover:shadow-ambient;
+  }
   .btn-outline {
     @apply border-2 border-gold text-navy hover:bg-gold hover:text-navy;
   }

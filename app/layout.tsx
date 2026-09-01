@@ -5,18 +5,13 @@ import { site } from '@/lib/site';
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} | ${site.tagline}`,
+    default: site.seoTitle,
     template: `%s | ${site.name}`,
   },
-  description: site.description,
+  description: site.metaDescription,
   applicationName: site.name,
   authors: [{ name: site.name }],
   creator: site.name,
-  keywords: [
-    'upholstery Cape Town', 'reupholstery Cape Town', 'upholstery repair', 'furniture upholstery',
-    'couch reupholstery', 'headboards Cape Town', 'antique restoration', 'commercial upholstery',
-    'bespoke furniture Cape Town', 'lounge suite reupholstery',
-  ],
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large' } },
   icons: {
     icon: [{ url: '/icon.png', type: 'image/png' }, { url: '/favicon.svg', type: 'image/svg+xml' }],
@@ -24,7 +19,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website', locale: 'en_ZA', url: site.url, siteName: site.name,
-    title: `${site.name} | ${site.tagline}`, description: site.description,
+    title: site.seoTitle, description: site.metaDescription,
     images: [{ url: '/images/og.png', width: 1200, height: 630, alt: site.name }],
   },
 };

@@ -4,17 +4,17 @@ import { site } from '@/lib/site';
 import { services, faqs } from '@/lib/content';
 import { pageMeta, faqSchema, serviceSchema, breadcrumbSchema } from '@/lib/seo';
 import { Icon } from '@/components/Icon';
+import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { Reveal } from '@/components/Reveal';
 import { JsonLd } from '@/components/JsonLd';
 import { FAQ } from '@/components/FAQ';
 import { PageHero, Breadcrumbs, SectionHeading, ServiceCard, ProcessSteps, QuoteCTA } from '@/components/blocks';
 
 export const metadata: Metadata = pageMeta({
-  title: 'Upholstery Services & Repairs',
+  title: 'Upholstery Services Cape Town',
   path: '/services',
   description:
-    'Full-service upholstery in Cape Town: reupholstery, upholstery repair, headboards, loose covers, antique restoration, outdoor and bespoke furniture — plus commercial contract work. Free quotes across the Western Cape.',
-  keywords: ['upholstery services Cape Town', 'couch reupholstery', 'furniture repair Cape Town', 'loose covers', 'headboards'],
+    'Reupholstery, upholstery repair, headboards, loose covers, antique restoration and custom furniture in Cape Town. Free quotes, collection and delivery.',
 });
 
 export default function ServicesPage() {
@@ -29,9 +29,10 @@ export default function ServicesPage() {
       <PageHero
         eyebrow="Upholstery repair & services"
         title={<>Every service to restore, refresh <span className="text-gold">or reimagine</span> your furniture</>}
-        intro="From a quick seam repair to a full custom build, our Cape Town atelier covers the complete spectrum of upholstery — for homes and businesses alike."
+        intro="From a quick seam repair to a full custom build, our Cape Town workshop covers every kind of upholstery work — for homes and businesses alike."
       >
         <Link href="/contact" className="btn btn-gold">Get a Free Quote <Icon name="arrow" className="h-4 w-4" /></Link>
+        <WhatsAppButton context="Services page" />
         <a href={`tel:${site.contact.phoneHref}`} className="btn btn-outline-light"><Icon name="phone" className="h-4 w-4" /> {site.contact.phone}</a>
       </PageHero>
       <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Services', path: '/services' }]} />
@@ -97,7 +98,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <QuoteCTA />
+      <QuoteCTA context="Services page" />
     </>
   );
 }

@@ -5,7 +5,7 @@ import { Icon } from './Icon';
 
 const serviceOptions = [
   'Reupholstery', 'Upholstery repair', 'Headboards & beds', 'Loose covers',
-  'Antique / heritage restoration', 'Outdoor & patio', 'Bespoke furniture',
+  'Antique / heritage restoration', 'Outdoor & patio', 'Custom furniture',
   'Commercial / contract', 'Not sure yet',
 ];
 

@@ -3,21 +3,21 @@ import type { Metadata } from 'next';
 import { projects } from '@/lib/content';
 import { pageMeta, breadcrumbSchema } from '@/lib/seo';
 import { Icon } from '@/components/Icon';
+import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { Reveal } from '@/components/Reveal';
 import { Photo } from '@/components/Photo';
 import { JsonLd } from '@/components/JsonLd';
 import { PageHero, Breadcrumbs, SectionHeading, StatsBand, QuoteCTA } from '@/components/blocks';
 
 export const metadata: Metadata = pageMeta({
-  title: 'Portfolio & Track Record',
+  title: 'Upholstery Portfolio',
   path: '/portfolio',
   description:
-    'A curated portfolio of Golden Diamond Upholstery projects across Cape Town — residential restorations, commercial refits and heritage pieces, each detailing the craftsmanship challenge and materials used.',
-  keywords: ['upholstery portfolio Cape Town', 'reupholstery examples', 'furniture restoration projects'],
+    'Upholstery and furniture restoration projects completed across Cape Town — residential, commercial and heritage pieces, with the materials used on each.',
 });
 
 const collections = [
-  { name: 'Residential', tagline: 'Enduring elegance for the private home — restorations and bespoke pieces for the Cape’s finest residences.' },
+  { name: 'Residential', tagline: 'Enduring elegance for the private home — restorations and custom-made pieces for homes across the Cape.' },
   { name: 'Commercial', tagline: 'Contract-grade craft for hotels, restaurants and venues that never stop.' },
   { name: 'Heritage', tagline: 'Preserving history through meticulous, period-correct restoration.' },
 ];
@@ -33,6 +33,7 @@ export default function PortfolioPage() {
         intro="Each project below showcases a specific craftsmanship challenge — the materials, techniques and problem-solving behind pieces that preserve heritage and elevate modern spaces."
       >
         <Link href="/contact" className="btn btn-gold">Start Your Project <Icon name="arrow" className="h-4 w-4" /></Link>
+        <WhatsAppButton context="Portfolio page" intent="I saw your portfolio and would like a quote." />
       </PageHero>
       <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Portfolio', path: '/portfolio' }]} />
 
@@ -85,7 +86,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <QuoteCTA title="Let’s build your vision" intro="Whether it’s restoring a cherished heirloom or outfitting a flagship venue, our master upholsterers are ready to bring your project to life." />
+      <QuoteCTA context="Portfolio page" title="Let’s build your vision" intro="Whether it’s restoring a cherished heirloom or outfitting a flagship venue, our master upholsterers are ready to bring your project to life." />
     </>
   );
 }

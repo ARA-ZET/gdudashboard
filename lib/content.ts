@@ -48,7 +48,7 @@ export const services: Service[] = [
     title: 'Headboards & Beds',
     short: 'Custom upholstered headboards and bed bases, made to measure.',
     description:
-      'Bespoke upholstered headboards and bed bases in any size, shape or fabric — from clean contemporary panels to deep diamond-buttoned statement pieces that anchor the room.',
+      'Custom-made upholstered headboards and bed bases in any size, shape or fabric — from clean contemporary panels to deep diamond-buttoned statement pieces that anchor the room.',
     icon: 'bed',
     features: [
       'Made-to-measure headboards',
@@ -100,8 +100,8 @@ export const services: Service[] = [
     ],
   },
   {
-    slug: 'bespoke-furniture',
-    title: 'Bespoke Furniture',
+    slug: 'custom-furniture',
+    title: 'Custom Furniture',
     short: 'Custom pieces designed and built to your exact specification.',
     description:
       'When nothing off-the-shelf will do, we design and build from scratch — sizing, frame, fill and finish tailored to your space, your posture and your architect’s vision.',
@@ -141,7 +141,7 @@ export const processSteps = [
   },
   {
     title: 'Collection & Craftsmanship',
-    body: 'We collect and deliver across the Cape. In the atelier, master upholsterers strip, rebuild and re-cover your piece with meticulous, hand-finished detail.',
+    body: 'We collect and deliver across the Cape. In our Cape Town workshop, our upholsterers strip, rebuild and re-cover your piece by hand.',
   },
   {
     title: 'White-Glove Delivery',
@@ -173,33 +173,85 @@ export const trustPillars = [
   },
 ];
 
+export type Testimonial = {
+  /** The review exactly as the customer wrote it. Do not edit it for tone. */
+  quote: string;
+  /** Reviewer name as it appears publicly on the review. */
+  name: string;
+  /** Optional context, e.g. 'Homeowner, Constantia'. */
+  role?: string;
+  /** Stars the reviewer actually gave, 1-5. Omit if you do not know. */
+  rating?: number;
+  /** Where the review was left — shown to the reader as attribution. */
+  source?: 'Google' | 'Facebook';
+  /** Link to the review listing, so a reader can verify it. */
+  sourceUrl?: string;
+  /** While true the entry is illustrative only and will NOT be published. */
+  placeholder?: boolean;
+};
+
 /**
  * PLACEHOLDER testimonials — replace every one with a genuine, verifiable client review.
  * Publishing invented reviews as real is deceptive and against advertising standards.
+ *
+ * To publish a real Google review, copy it across verbatim and drop the
+ * `placeholder` flag — the carousel appears automatically once one entry is real:
+ *
+ *   {
+ *     quote: 'They collected our couch on the Monday and it was back by Friday…',
+ *     name: 'Thandiwe M.',
+ *     role: 'Khayelitsha',
+ *     rating: 5,
+ *     source: 'Google',
+ *     sourceUrl: 'https://share.google/1kwOHPmOLefAIkLhC',
+ *   },
  */
-export const testimonials = [
+export const testimonials: Testimonial[] = [
   {
-    quote:
-      'Golden Diamond reupholstered our two heirloom wingbacks and they came back better than the day they were bought. Structural integrity and finish were flawless.',
-    name: 'Client Name', // PLACEHOLDER
-    role: 'Homeowner, Constantia', // PLACEHOLDER
-    placeholder: true,
+    // The owner's public reply to this review confirms it was 5 stars.
+    quote: 'Elegant and slick designs. These guys don’t disappoint',
+    name: 'Lincoln Matwaya',
+    rating: 5,
+    source: 'Google',
+    sourceUrl: 'https://share.google/1kwOHPmOLefAIkLhC',
   },
   {
-    quote:
-      'They refitted the banquettes and lounge seating for our boutique hotel on time and to an exceptional standard. The fabrics have held up beautifully to heavy use.',
-    name: 'Client Name', // PLACEHOLDER
-    role: 'Operations Manager, Boutique Hotel', // PLACEHOLDER
-    placeholder: true,
+    quote: 'You wanna see good furniture, why not visit them with their best designs they’ll live you speechless',
+    name: 'Bongani Soko',
+    role: 'Google Local Guide',
+    source: 'Google',
+    sourceUrl: 'https://share.google/1kwOHPmOLefAIkLhC',
   },
   {
-    quote:
-      'From the free home visit to the white-glove delivery, the whole process was seamless. Our tired old couch feels brand new — highly recommended.',
-    name: 'Client Name', // PLACEHOLDER
-    role: 'Homeowner, Sea Point', // PLACEHOLDER
-    placeholder: true,
+    quote: 'Good work guys you are so talented 👏... Order yours they won’t disappoint you..',
+    name: 'Charmaine Mutero',
+    source: 'Google',
+    sourceUrl: 'https://share.google/1kwOHPmOLefAIkLhC',
+  },
+  {
+    quote: 'Yoo these guys are so talented .if u are looking for quality jus go for golden diamond upholstery',
+    name: 'Peter Kelvin',
+    source: 'Google',
+    sourceUrl: 'https://share.google/1kwOHPmOLefAIkLhC',
+  },
+  {
+    quote: 'Very good quality, I was impressed.',
+    name: 'Gladmore Mutyanda',
+    source: 'Google',
+    sourceUrl: 'https://share.google/1kwOHPmOLefAIkLhC',
   },
 ];
+
+/**
+ * Only testimonials without `placeholder: true` are published. Invented reviews
+ * must never reach the live site: the Consumer Protection Act and the ASA Code
+ * both treat fabricated endorsements as misleading advertising, and Google's
+ * spam policies treat them as a quality signal against the whole domain.
+ * Delete the `placeholder` flag from an entry once it is a genuine, verifiable
+ * review — the testimonial sections reappear automatically.
+ */
+export const publishedTestimonials = testimonials.filter((t) => !t.placeholder);
+export const hasTestimonials = publishedTestimonials.length > 0;
 
 /**
  * PLACEHOLDER portfolio projects — replace with your real projects and photos.
@@ -244,8 +296,8 @@ export const projects = [
     swatch: 'sand',
     image: photos.diningSeating,
     summary:
-      'Bespoke dining chairs in historically accurate silk for a Stellenbosch wine estate — custom-milled edge bindings on every single chair.',
-    materials: ['Bespoke silk', 'Custom edge binding', 'Solid hardwood frame'],
+      'Custom dining chairs in historically accurate silk for a Stellenbosch wine estate — custom-milled edge bindings on every single chair.',
+    materials: ['Custom-woven silk', 'Custom edge binding', 'Solid hardwood frame'],
   },
   {
     slug: 'cape-dutch-heirloom',
@@ -276,8 +328,12 @@ export const faqs = [
     a: 'Yes. We provide free, no-obligation quotes across Cape Town and the Western Cape. Send us photos and dimensions for a quick estimate, or book an in-home assessment and we’ll come to you.',
   },
   {
-    q: 'How much does it cost to reupholster a couch?',
-    a: 'Cost depends on the size and construction of the piece and your fabric choice. After a quick assessment we give you a clear written quote with no surprises. Repairs are often far more affordable than a full re-cover.',
+    q: 'How much does it cost to reupholster a couch in Cape Town?',
+    a: 'Cost depends on the size and construction of the piece and the fabric you choose. After a quick assessment we give you a clear written quote with no surprises. A repair is often far cheaper than a full re-cover, and we will tell you honestly which one your piece needs.',
+  },
+  {
+    q: 'Is it cheaper to reupholster a couch or buy a new one?',
+    a: 'If the frame is solid, reupholstering is usually cheaper than replacing a comparable couch — and you keep the size, shape and comfort you already know. Older furniture is often built better than new budget furniture, so it is worth restoring. If the frame is beyond saving we will tell you rather than sell you work you do not need.',
   },
   {
     q: 'Can I use my own fabric?',
@@ -297,6 +353,14 @@ export const faqs = [
   },
   {
     q: 'Which areas do you serve?',
-    a: 'We serve homes and businesses across Cape Town — including the Southern Suburbs, Atlantic Seaboard, City Bowl, Northern Suburbs and the Winelands. If you’re nearby, just ask.',
+    a: 'We serve homes and businesses across Cape Town — Khayelitsha, Mitchells Plain, Delft, Blue Downs and the surrounding areas, plus the Southern Suburbs, Atlantic Seaboard, City Bowl, Northern Suburbs, the Helderberg and the Winelands. If you are nearby, just ask.',
+  },
+  {
+    q: 'Where is your workshop?',
+    a: 'Our workshop is at the Khayelitsha Training Centre, Shop 2, Block C, 50 Lwandle Road, Village 2 North, Cape Town, 7784. Visits are by appointment so someone is free to talk you through fabrics and options.',
+  },
+  {
+    q: 'Can you fix a sagging couch seat?',
+    a: 'Yes. Sagging seats are one of the most common repairs we do. Depending on the cause we re-tie or replace the springs, rebuild the seat platform, and replace flattened foam or fibre — usually without needing to re-cover the whole piece.',
   },
 ];

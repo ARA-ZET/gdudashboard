@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { site } from '@/lib/site';
-import { services, faqs } from '@/lib/content';
+import { services, faqs, hasTestimonials } from '@/lib/content';
 import { pageMeta, faqSchema } from '@/lib/seo';
 import { Icon } from '@/components/Icon';
+import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { Reveal } from '@/components/Reveal';
 import { Photo } from '@/components/Photo';
 import { photos } from '@/lib/photos';
@@ -16,8 +17,7 @@ import {
 export const metadata: Metadata = pageMeta({
   title: 'Upholstery Cape Town',
   path: '/',
-  description:
-    'Golden Diamond Upholstery — expert reupholstery, upholstery repair, bespoke furniture and heritage restoration for homes and businesses across Cape Town. Free quotes, home visits, lifetime frame guarantee.',
+  description: site.metaDescription,
 });
 
 const chips = ['Reupholstery', 'Repairs', 'Headboards', 'Loose covers', 'Antiques', 'Commercial'];
@@ -25,7 +25,7 @@ const chips = ['Reupholstery', 'Repairs', 'Headboards', 'Loose covers', 'Antique
 export default function HomePage() {
   return (
     <>
-      <JsonLd data={faqSchema(faqs)} />
+      <JsonLd data={faqSchema(faqs.slice(0, 5))} />
 
       {/* HERO */}
       <section className="relative overflow-hidden bg-navy text-white">
@@ -33,15 +33,16 @@ export default function HomePage() {
         <div className="absolute -right-40 top-0 h-[36rem] w-[36rem] rounded-full bg-gold/10 blur-3xl" />
         <div className="container-x relative grid items-center gap-12 py-16 lg:grid-cols-2 lg:py-24">
           <Reveal>
-            <Eyebrow light>Cape Town&apos;s premier upholstery atelier</Eyebrow>
+            <Eyebrow light>Upholstery &amp; reupholstery specialists</Eyebrow>
             <h1 className="mt-5 text-display !text-white">
-              Masterful upholstery for <span className="text-gold">home &amp; hospitality</span>
+              Upholstery &amp; reupholstery in <span className="text-gold">Cape Town</span>
             </h1>
             <p className="mt-6 max-w-xl text-base md:text-lg leading-relaxed text-white/75">
-              Expert reupholstery, repairs and bespoke furniture — where heritage craftsmanship meets modern durability. Serving discerning homes and businesses across the Western Cape since {site.foundedYear}.
+              We reupholster and repair sofas, couches, armchairs and dining chairs, build custom headboards, and restore antiques — for homes and businesses across Cape Town and the Western Cape.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link href="/contact" className="btn btn-gold">Get a Free Quote <Icon name="arrow" className="h-4 w-4" /></Link>
+              <WhatsAppButton context="home page" />
               <Link href="/portfolio" className="btn btn-outline-light">View Our Work</Link>
             </div>
             <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-[13px] text-white/60">
@@ -53,7 +54,7 @@ export default function HomePage() {
 
           <Reveal delay={120} className="relative hidden lg:block">
             <div className="relative overflow-hidden rounded-xl shadow-ambient-lg ring-1 ring-white/10">
-              <Photo id={photos.heroSofa} priority width={1400} alt="Bespoke velvet sofa reupholstered by Golden Diamond Upholstery, Cape Town" className="aspect-[4/3] w-full" />
+              <Photo id={photos.heroSofa} priority width={1400} alt="Custom velvet sofa reupholstered by Golden Diamond Upholstery, Cape Town" className="aspect-[4/3] w-full" />
             </div>
             <div className="absolute -bottom-6 -left-6 w-44 rounded-lg bg-surface-white p-5 text-navy shadow-ambient-lg">
               <div className="font-serif text-3xl font-bold text-navy">20+</div>
@@ -82,7 +83,7 @@ export default function HomePage() {
           <div className="flex flex-wrap items-end justify-between gap-6">
             <SectionHeading
               eyebrow="Our services"
-              title="From a simple repair to a full bespoke build"
+              title="From a simple repair to a full custom build"
               intro="Whatever your furniture needs, our master upholsterers bring it back to its best — or build it new from the frame up."
             />
             <Link href="/services" className="link-underline group text-navy">
@@ -101,7 +102,7 @@ export default function HomePage() {
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <Reveal className="relative order-2 lg:order-1">
               <div className="overflow-hidden rounded-xl ring-1 ring-white/10">
-                <Photo id={photos.armchairDetail} variant="rust" alt="Restored heritage armchair in the Golden Diamond Cape Town atelier" className="aspect-[5/4] w-full" />
+                <Photo id={photos.armchairDetail} variant="rust" alt="Restored heritage armchair in the Golden Diamond Upholstery workshop, Cape Town" className="aspect-[5/4] w-full" />
               </div>
               <div className="absolute -right-5 -top-5 hidden rounded-lg bg-surface-white p-5 text-navy shadow-ambient-lg sm:block">
                 <div className="max-w-[13rem] font-serif text-base md:text-lg italic leading-snug">“Craftsmanship is not a technique — it is a devotion.”</div>
@@ -112,7 +113,7 @@ export default function HomePage() {
                 light
                 eyebrow="Rooted in the Cape"
                 title="Two decades of uncompromising craft"
-                intro="From our Cape Town atelier we draw on the region’s rich heritage — partnering with local artisans and sourcing sustainable materials to deliver world-class upholstery for the most discerning clients."
+                intro="From our Cape Town workshop we draw on the region’s rich heritage — partnering with local artisans and sourcing sustainable materials to deliver world-class upholstery for the most discerning clients."
               />
               <ul className="mt-7 space-y-4">
                 {[
@@ -186,13 +187,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className="section-sm bg-surface-dim">
-        <div className="container-x">
-          <SectionHeading center eyebrow="Client stories" title="Trusted by homeowners &amp; businesses" intro="Craftsmanship our clients return to — and recommend." />
-          <div className="mt-12"><Testimonials /></div>
-        </div>
-      </section>
+      {/* TESTIMONIALS — hidden until at least one genuine review is added. */}
+      {hasTestimonials && (
+        <section className="section-sm bg-surface-dim">
+          <div className="container-x">
+            <SectionHeading center eyebrow="Client stories" title="Trusted by homeowners &amp; businesses" intro="Craftsmanship our clients return to — and recommend." />
+            <div className="mt-12"><Testimonials /></div>
+          </div>
+        </section>
+      )}
 
       {/* FAQ */}
       <section className="section">
@@ -202,7 +205,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <QuoteCTA />
+      <QuoteCTA context="home page" />
     </>
   );
 }
