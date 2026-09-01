@@ -11,7 +11,7 @@ runConfig:
 # The public site URL is used for canonical tags, sitemap and JSON-LD.
 env:
   - variable: NEXT_PUBLIC_SITE_URL
-    value: https://gdudashboard--gdu-dashboard.us-east4.hosted.app
+    value: https://goldendiamondupholstery.co.za
     availability:
       - BUILD
       - RUNTIME
@@ -24,9 +24,9 @@ env:
   #   secret: RESEND_API_KEY        # name of the secret in Secret Manager
   #   availability: [RUNTIME]
   - variable: CONTACT_TO
-    value: hello@goldendiamond.co.za   # where quote requests are emailed
+    value: hello@goldendiamondupholstery.co.za   # where quote requests are emailed
     availability: [RUNTIME]
   # Once your domain is verified in Resend, set a branded from-address:
   # - variable: CONTACT_FROM
-  #   value: Golden Diamond Website <quotes@goldendiamond.co.za>
+  #   value: Golden Diamond Website <quotes@goldendiamondupholstery.co.za>
   #   availability: [RUNTIME]

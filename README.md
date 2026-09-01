@@ -87,7 +87,7 @@ logs submissions to the App Hosting logs as a fallback. To turn email on:
 
 1. Create a free account at [resend.com](https://resend.com) and generate an API key.
 2. Verify your sending domain in Resend (so email can come from
-   `quotes@goldendiamond.co.za`). Until then it uses Resend’s `onboarding@resend.dev`.
+   `quotes@goldendiamondupholstery.co.za`). Until then it uses Resend’s `onboarding@resend.dev`.
 3. Add the secret + variables (see `apphosting.yaml`):
    - `RESEND_API_KEY` — store in Cloud Secret Manager and reference it.
    - `CONTACT_TO` — the inbox that should receive leads.

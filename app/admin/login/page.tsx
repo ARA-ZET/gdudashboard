@@ -47,7 +47,7 @@ export default function LoginPage() {
         <form onSubmit={onSubmit} className="rounded-lg bg-white p-7 shadow-ambient-lg">
           <div className="space-y-4">
             <Field label="Email" required>
-              <Input type="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@goldendiamond.co.za" />
+              <Input type="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@goldendiamondupholstery.co.za" />
             </Field>
             <Field label="Password" required>
               <Input type="password" autoComplete="current-password" required value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" />

@@ -16,14 +16,14 @@ export const site = {
     'Golden Diamond Upholstery is a Cape Town atelier specialising in expert reupholstery, upholstery repair, bespoke furniture and heritage restoration for homes and businesses across the Western Cape.',
   foundedYear: 2004, // PLACEHOLDER — confirm your real founding year
   // The canonical site URL. Overridden at build/runtime by NEXT_PUBLIC_SITE_URL.
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://goldendiamond.co.za',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://goldendiamondupholstery.co.za',
 
   contact: {
     phone: '+27 81 572 3431',
     phoneHref: '27815723431',
     whatsapp: '+27 81 572 3431',
     whatsappHref: '27815723431',
-    email: 'hello@goldendiamond.co.za', // PLACEHOLDER — no email supplied yet; update or remove
+    email: 'hello@goldendiamondupholstery.co.za', // PLACEHOLDER — no email supplied yet; update or remove
     address: {
       street: 'Khayelitsha Training Centre, Shop 2, Block C',
       area: '50 Lwandle Rd, Village 2 North',
@@ -54,7 +54,7 @@ export const site = {
    */
   developer: {
     name: 'ARAZET DESIGN',
-    url: 'https://arazetdesign.co.za',
+    url: 'https://arazetdesign.co.za/portfolio',
     logoDark: '/logo/arazet-long-dark.webp',
     logoLight: '/logo/arazet-long-white.webp',
   },

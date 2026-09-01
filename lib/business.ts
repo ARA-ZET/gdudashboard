@@ -10,7 +10,7 @@ export const defaultBusiness: BusinessSettings = {
   addressLines: 'Khayelitsha Training Centre, Shop 2, Block C\n50 Lwandle Rd, Village 2 North, Cape Town, 7784',
   phone: '+27 81 572 3431',
   email: '', // no business email supplied yet
-  website: 'goldendiamond.co.za',
+  website: 'goldendiamondupholstery.co.za',
   regNo: '',
   vatNo: '',
   bankName: 'First National Bank (FNB)',

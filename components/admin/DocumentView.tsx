@@ -126,11 +126,12 @@ export function DocumentView({ doc, business = {} }: { doc: BusinessDoc; busines
         Thank you for choosing {name}. {isQuote ? 'This quote is subject to our standard terms.' : 'Please use the invoice number as your payment reference.'}
       </div>
 
-      {/* Developer credit — prints with the document, so the URL is spelled out. */}
+      {/* Developer credit — prints with the document, so the bare domain is
+          spelled out rather than the full link target. */}
       <div className="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[9px] uppercase tracking-wide text-ink-muted">
         <span>Designed &amp; built by</span>
         <Image src={site.developer.logoDark} alt={site.developer.name} width={59} height={16} priority className="h-4 w-auto" />
-        <span>{site.developer.url.replace(/^https?:\/\//, '')}</span>
+        <span>{new URL(site.developer.url).hostname}</span>
       </div>
     </div>
   );

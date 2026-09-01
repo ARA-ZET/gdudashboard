@@ -46,8 +46,8 @@ export default function SettingsPage() {
               <div className="sm:col-span-2"><Field label="Business name" hint="Defaults to “Golden Diamond Upholstery” if left blank."><Input value={form.name ?? ''} onChange={set('name')} placeholder="Golden Diamond Upholstery" /></Field></div>
               <div className="sm:col-span-2"><Field label="Address"><Textarea rows={2} value={form.addressLines ?? ''} onChange={set('addressLines')} placeholder="45 Bree Street, Cape Town CBD, 8001" /></Field></div>
               <Field label="Phone"><Input value={form.phone ?? ''} onChange={set('phone')} placeholder="+27 21 555 0199" /></Field>
-              <Field label="Email"><Input value={form.email ?? ''} onChange={set('email')} placeholder="hello@goldendiamond.co.za" /></Field>
-              <Field label="Website"><Input value={form.website ?? ''} onChange={set('website')} placeholder="goldendiamond.co.za" /></Field>
+              <Field label="Email"><Input value={form.email ?? ''} onChange={set('email')} placeholder="hello@goldendiamondupholstery.co.za" /></Field>
+              <Field label="Website"><Input value={form.website ?? ''} onChange={set('website')} placeholder="goldendiamondupholstery.co.za" /></Field>
               <div className="grid grid-cols-2 gap-4">
                 <Field label="Company reg. no."><Input value={form.regNo ?? ''} onChange={set('regNo')} placeholder="2024/123456/07" /></Field>
                 <Field label="VAT no. (optional)"><Input value={form.vatNo ?? ''} onChange={set('vatNo')} placeholder="—" /></Field>
