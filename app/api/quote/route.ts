@@ -40,9 +40,14 @@ export async function POST(req: Request) {
 
   // Email the lead to the business via Resend when configured.
   const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO;
+  // CONTACT_TO accepts a comma-separated list, so a lead can land in several
+  // inboxes at once (e.g. sales@ and info@) without needing a mailing list.
+  const to = (process.env.CONTACT_TO ?? '')
+    .split(',')
+    .map((addr) => addr.trim())
+    .filter(Boolean);
   const from = process.env.CONTACT_FROM || 'Golden Diamond Website <onboarding@resend.dev>';
-  if (apiKey && to) {
+  if (apiKey && to.length > 0) {
     try {
       const { Resend } = await import('resend');
       const resend = new Resend(apiKey);
@@ -50,7 +55,7 @@ export async function POST(req: Request) {
         from,
         to,
         replyTo: submission.email || undefined,
-        subject: `New quote request — ${submission.service || 'Upholstery'} (${submission.property})`,
+        subject: `New quote request from ${submission.name} — ${submission.service || 'Upholstery'} (${submission.property})`,
         text: Object.entries(submission).map(([k, v]) => `${k}: ${v}`).join('\n'),
       });
       return NextResponse.json({ ok: true, delivered: true });
