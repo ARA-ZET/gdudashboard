@@ -9,21 +9,6 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
   },
-  // The www host is configured in App Hosting to serve this same app, which
-  // made it a complete duplicate of the site: every www page rendered fine and
-  // pointed its canonical at the apex, so Search Console reported www URLs as
-  // "Alternate page with proper canonical tag" and indexed none of them.
-  // A 301 to the apex leaves one crawlable host and keeps www traffic.
-  async redirects() {
-    return [
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'www.goldendiamondupholstery.co.za' }],
-        destination: 'https://goldendiamondupholstery.co.za/:path*',
-        permanent: true,
-      },
-    ];
-  },
   async headers() {
     return [
       {
