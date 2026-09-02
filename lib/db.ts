@@ -1,7 +1,7 @@
 'use client';
 import {
   collection, doc, addDoc, getDoc, getDocs, updateDoc, deleteDoc, setDoc,
-  onSnapshot, query, orderBy, runTransaction, serverTimestamp, Timestamp,
+  onSnapshot, query, orderBy, where, runTransaction, serverTimestamp, Timestamp,
 } from 'firebase/firestore';
 import { db } from './firebase';
 
@@ -47,6 +47,67 @@ export type BusinessDoc = {
   createdAt?: Timestamp;
   updatedAt?: Timestamp;
 };
+
+/* ----------------------------- Leads ----------------------------- */
+
+/**
+ * A quote request submitted through the public contact form.
+ *
+ * Written straight from the browser so a lead is never lost to an email
+ * misconfiguration — Firestore is the record, the Resend email is only a
+ * notification. Security rules allow create-only from the public and restrict
+ * every read to signed-in staff (see firestore.rules).
+ */
+export type Lead = {
+  id?: string;
+  name: string;
+  email?: string;
+  phone?: string;
+  service?: string;
+  property?: string;
+  message?: string;
+  /** The page the form was submitted from. */
+  pageUrl?: string;
+  /** False until a staff member opens it in the admin. */
+  read: boolean;
+  readAt?: Timestamp | null;
+  createdAt?: Timestamp;
+};
+
+export type NewLead = Omit<Lead, 'id' | 'read' | 'readAt' | 'createdAt'>;
+
+export async function createLead(data: NewLead) {
+  return addDoc(collection(db, 'leads'), {
+    ...data,
+    read: false,
+    readAt: null,
+    createdAt: serverTimestamp(),
+  });
+}
+
+export function subscribeLeads(cb: (leads: Lead[]) => void) {
+  const q = query(collection(db, 'leads'), orderBy('createdAt', 'desc'));
+  return onSnapshot(q, (snap) =>
+    cb(snap.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<Lead, 'id'>) }))),
+  );
+}
+
+/** Live count of unopened leads, for the sidebar badge. */
+export function subscribeUnreadLeadCount(cb: (n: number) => void) {
+  const q = query(collection(db, 'leads'), where('read', '==', false));
+  return onSnapshot(q, (snap) => cb(snap.size), () => cb(0));
+}
+
+export async function setLeadRead(id: string, read: boolean) {
+  return updateDoc(doc(db, 'leads', id), {
+    read,
+    readAt: read ? serverTimestamp() : null,
+  });
+}
+
+export async function deleteLead(id: string) {
+  return deleteDoc(doc(db, 'leads', id));
+}
 
 /* -------------------- Business / banking settings -------------------- */
 

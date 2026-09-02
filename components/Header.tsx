@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { site } from '@/lib/site';
 import { Logo } from './Logo';
 import { Icon } from './Icon';
-import { WhatsAppButton, whatsappHref } from './WhatsAppButton';
+import { WhatsAppButton, WhatsAppLink } from './WhatsAppButton';
 
 export function Header() {
   const pathname = usePathname();
@@ -63,16 +63,13 @@ export function Header() {
               <Icon name="phone" className="h-4 w-4" />
               <span className="hidden xl:inline">{site.contact.phone}</span>
             </a>
-            <a
-              href={whatsappHref('site header')}
-              target="_blank"
-              rel="noopener noreferrer"
+            <WhatsAppLink
               aria-label="WhatsApp us"
               className="grid h-10 w-10 place-items-center rounded-md border border-white/25 text-white transition-colors hover:border-gold hover:text-gold"
             >
               <Icon name="whatsapp" className="h-4 w-4" />
-            </a>
-            <Link href="/contact" className="btn btn-gold">Get a Free Quote</Link>
+            </WhatsAppLink>
+            <Link href="/contact" className="btn btn-gold"><span className="sm:hidden">Free Quote</span><span className="hidden sm:inline">Get a Free Quote</span></Link>
           </div>
 
           <button
@@ -108,10 +105,10 @@ export function Header() {
             </Link>
           ))}
           <div className="mt-6 flex flex-col gap-3">
-            <Link href="/contact" className="btn btn-gold w-full">Get a Free Quote</Link>
-            <WhatsAppButton context="mobile menu" className="w-full" />
+            <Link href="/contact" className="btn btn-gold w-full"><span className="sm:hidden">Free Quote</span><span className="hidden sm:inline">Get a Free Quote</span></Link>
+            <WhatsAppButton className="w-full" />
             <a href={`tel:${site.contact.phoneHref}`} className="btn btn-outline-light w-full">
-              <Icon name="phone" className="h-4 w-4" /> {site.contact.phone}
+              <Icon name="phone" className="h-4 w-4 shrink-0" /><span className="sm:hidden">Call</span><span className="hidden sm:inline">{site.contact.phone}</span>
             </a>
           </div>
         </nav>

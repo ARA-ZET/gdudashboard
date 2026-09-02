@@ -5,6 +5,8 @@ import { processSteps, trustPillars, publishedTestimonials, type Service } from 
 import { Icon, type IconName } from './Icon';
 import { Reveal } from './Reveal';
 import { Swatch } from './Swatch';
+import { Photo } from './Photo';
+import type { SitePhoto } from '@/lib/photos';
 import { ReviewCarousel } from './ReviewCarousel';
 import { WhatsAppButton } from './WhatsAppButton';
 
@@ -38,11 +40,14 @@ export function PageHero({
   eyebrow,
   title,
   intro,
+  photo,
   children,
 }: {
   eyebrow: string;
   title: ReactNode;
   intro: ReactNode;
+  /** Hero photograph for this page. Shown at every width, not just desktop. */
+  photo?: SitePhoto;
   children?: ReactNode;
 }) {
   return (
@@ -50,13 +55,27 @@ export function PageHero({
       <div className="absolute inset-0 texture-tufted opacity-60" />
       <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-gold/10 blur-3xl" />
       <div className="absolute -left-24 bottom-0 h-80 w-80 rounded-full bg-navy-600/40 blur-3xl" />
-      <div className="container-x relative py-20 md:py-28">
+      {/* Tighter vertical padding on phones: the photo now carries the height,
+          so the old py-20 left the copy pushed well below the fold. */}
+      <div
+        className={`container-x relative py-12 md:py-20 lg:py-28 ${
+          photo ? 'grid items-center gap-10 lg:grid-cols-2 lg:gap-14' : ''
+        }`}
+      >
         <Reveal>
           <Eyebrow light>{eyebrow}</Eyebrow>
-          <h1 className="mt-5 max-w-4xl text-display !text-white">{title}</h1>
-          <p className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-white/75">{intro}</p>
+          <h1 className={`mt-5 text-display !text-white ${photo ? '' : 'max-w-4xl'}`}>{title}</h1>
+          <p className={`mt-6 text-base md:text-lg leading-relaxed text-white/75 ${photo ? '' : 'max-w-2xl'}`}>{intro}</p>
           {children && <div className="mt-9 flex flex-wrap items-center gap-4">{children}</div>}
         </Reveal>
+
+        {photo && (
+          <Reveal delay={120} className="overflow-hidden rounded-xl shadow-ambient-lg ring-1 ring-white/10">
+            {/* Wider crop on phones so the piece stays legible in a short band;
+                squarer on desktop where it sits beside the copy. */}
+            <Photo photo={photo} priority className="aspect-[16/10] w-full lg:aspect-[4/3]" />
+          </Reveal>
+        )}
       </div>
     </section>
   );
@@ -100,11 +119,13 @@ export function TrustPillars() {
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
       {trustPillars.map((p, i) => (
         <Reveal key={p.title} delay={i * 80} className="card p-7">
-          <span className="grid h-12 w-12 place-items-center rounded-md bg-navy text-gold">
-            <Icon name={p.icon as IconName} className="h-6 w-6" />
-          </span>
-          <h3 className="mt-5 text-base md:text-lg font-semibold text-navy">{p.title}</h3>
-          <p className="mt-2 text-[15px] leading-relaxed text-ink-muted">{p.body}</p>
+          <div className="flex items-center gap-4">
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-md bg-navy text-gold">
+              <Icon name={p.icon as IconName} className="h-6 w-6" />
+            </span>
+            <h3 className="text-base md:text-lg font-semibold text-navy">{p.title}</h3>
+          </div>
+          <p className="mt-4 text-[15px] leading-relaxed text-ink-muted">{p.body}</p>
         </Reveal>
       ))}
     </div>
@@ -135,12 +156,9 @@ export function Testimonials() {
 export function QuoteCTA({
   title = 'Ready to bring your furniture back to life?',
   intro = 'Book a free, no-obligation quote or in-home assessment anywhere in Cape Town. Our master upholsterers will guide you from fabric to finish.',
-  context = 'quote section',
 }: {
   title?: string;
   intro?: string;
-  /** Names this CTA in the prefilled WhatsApp message, e.g. 'Commercial page'. */
-  context?: string;
 }) {
   return (
     <section className="relative overflow-hidden bg-navy text-white">
@@ -151,10 +169,10 @@ export function QuoteCTA({
           <h2 className="mx-auto max-w-3xl text-h2 !text-white">{title}</h2>
           <p className="mx-auto mt-5 max-w-2xl text-base md:text-lg text-white/70">{intro}</p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-            <Link href="/contact" className="btn btn-gold">Get a Free Quote <Icon name="arrow" className="h-4 w-4" /></Link>
-            <WhatsAppButton context={context} />
+            <Link href="/contact" className="btn btn-gold"><span className="sm:hidden">Free Quote</span><span className="hidden sm:inline">Get a Free Quote</span> <Icon name="arrow" className="h-4 w-4" /></Link>
+            <WhatsAppButton />
             <a href={`tel:${site.contact.phoneHref}`} className="btn btn-outline-light">
-              <Icon name="phone" className="h-4 w-4" /> {site.contact.phone}
+              <Icon name="phone" className="h-4 w-4 shrink-0" /><span className="sm:hidden">Call</span><span className="hidden sm:inline">{site.contact.phone}</span>
             </a>
           </div>
         </Reveal>
@@ -166,11 +184,13 @@ export function QuoteCTA({
 export function ServiceCard({ service }: { service: Service }) {
   return (
     <div id={service.slug} className="card group scroll-mt-28 p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-ambient-lg">
-      <span className="grid h-14 w-14 place-items-center rounded-md bg-navy text-gold transition-colors group-hover:bg-gold group-hover:text-navy">
-        <Icon name={service.icon as IconName} className="h-7 w-7" />
-      </span>
-      <h3 className="mt-6 text-h3">{service.title}</h3>
-      <p className="mt-3 text-[15px] leading-relaxed text-ink-muted">{service.description}</p>
+      <div className="flex items-center gap-4">
+        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-md bg-navy text-gold transition-colors group-hover:bg-gold group-hover:text-navy">
+          <Icon name={service.icon as IconName} className="h-6 w-6" />
+        </span>
+        <h3 className="text-h3">{service.title}</h3>
+      </div>
+      <p className="mt-4 text-[15px] leading-relaxed text-ink-muted">{service.description}</p>
       <ul className="mt-5 space-y-2.5">
         {service.features.map((f) => (
           <li key={f} className="flex items-start gap-2.5 text-[14px] text-navy">

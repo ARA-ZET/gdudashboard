@@ -37,12 +37,13 @@ export default function ResidentialPage() {
 
       <PageHero
         eyebrow="For the Cape home"
-        title={<>Elevating <span className="text-gold">Cape elegance</span>, one room at a time</>}
+        title={<>Upholstery for <span className="text-gold">Cape Town homes</span></>}
         intro="We reupholster and repair the furniture in Cape Town homes, build custom headboards and seating to order, and restore family pieces that are worth keeping."
+        photo={photos.upholsteredBedSuite}
       >
-        <Link href="/contact" className="btn btn-gold">Book a Free Home Visit <Icon name="arrow" className="h-4 w-4" /></Link>
-        <WhatsAppButton context="Residential page" intent="I’d like a quote for furniture in my home." />
-        <Link href="/portfolio" className="btn btn-outline-light">See residential work</Link>
+        <Link href="/contact" className="btn btn-gold"><span className="sm:hidden">Free Visit</span><span className="hidden sm:inline">Book a Free Home Visit</span> <Icon name="arrow" className="h-4 w-4" /></Link>
+        <WhatsAppButton intent="I’d like a quote for furniture in my home." />
+        <Link href="/portfolio" className="btn btn-outline-light"><span className="sm:hidden">See work</span><span className="hidden sm:inline">See residential work</span></Link>
       </PageHero>
       <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Residential', path: '/residential' }]} />
 
@@ -53,9 +54,11 @@ export default function ResidentialPage() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {offerings.map((o, i) => (
               <Reveal key={o.t} delay={i * 70} className="card p-7">
-                <span className="grid h-12 w-12 place-items-center rounded-md bg-navy text-gold"><Icon name={o.icon as any} className="h-6 w-6" /></span>
-                <h3 className="mt-5 text-base md:text-lg font-semibold text-navy">{o.t}</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-ink-muted">{o.d}</p>
+                <div className="flex items-center gap-4">
+                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-md bg-navy text-gold"><Icon name={o.icon as any} className="h-6 w-6" /></span>
+                  <h3 className="text-base md:text-lg font-semibold text-navy">{o.t}</h3>
+                </div>
+                <p className="mt-4 text-[15px] leading-relaxed text-ink-muted">{o.d}</p>
               </Reveal>
             ))}
           </div>
@@ -66,7 +69,7 @@ export default function ResidentialPage() {
       <section className="section-sm bg-surface-dim">
         <div className="container-x grid items-center gap-12 lg:grid-cols-2">
           <Reveal className="overflow-hidden rounded-xl shadow-ambient ring-1 ring-black/5">
-            <Photo id={photos.fabricChair} variant="navy" alt="Heritage upholstered chair restored by Golden Diamond Upholstery, Cape Town" className="aspect-[5/4] w-full" />
+            <Photo photo={photos.fabricChair} variant="navy" className="aspect-[5/4] w-full" />
           </Reveal>
           <div>
             <SectionHeading eyebrow="Heritage restoration" title="Family heirlooms, faithfully renewed" intro="Historic Cape Dutch finds and treasured family pieces carry a narrative that mass-production can’t replicate. We preserve that story — every scratch and contour honoured — while renewing comfort for generations to come." />
@@ -97,7 +100,7 @@ export default function ResidentialPage() {
         </section>
       )}
 
-      <QuoteCTA context="Residential page" title="Ready to refresh your home?" intro="Book a free in-home assessment anywhere in Cape Town. We’ll bring fabric samples and honest advice." />
+      <QuoteCTA title="Ready to refresh your home?" intro="Book a free in-home assessment anywhere in Cape Town. We’ll bring fabric samples and honest advice." />
     </>
   );
 }

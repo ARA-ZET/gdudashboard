@@ -2,8 +2,9 @@ import type { Metadata } from 'next';
 import { site } from '@/lib/site';
 import { faqs } from '@/lib/content';
 import { pageMeta, breadcrumbSchema, faqSchema } from '@/lib/seo';
+import { photos } from '@/lib/photos';
 import { Icon } from '@/components/Icon';
-import { WhatsAppButton, whatsappHref } from '@/components/WhatsAppButton';
+import { WhatsAppButton, WhatsAppLink } from '@/components/WhatsAppButton';
 import { Reveal } from '@/components/Reveal';
 import { JsonLd } from '@/components/JsonLd';
 import { FAQ } from '@/components/FAQ';
@@ -29,10 +30,11 @@ export default function ContactPage() {
         eyebrow="Get in touch"
         title={<>Begin your <span className="text-gold">free quote</span></>}
         intro="Tell us about your piece and our team will guide you from fabric to finish. Prefer to talk? Call or WhatsApp us directly — we’re happy to help."
+        photo={photos.tuftedBed}
       >
-        <WhatsAppButton context="Contact page hero" />
+        <WhatsAppButton />
         <a href={`tel:${site.contact.phoneHref}`} className="btn btn-outline-light">
-          <Icon name="phone" className="h-4 w-4" /> {site.contact.phone}
+          <Icon name="phone" className="h-4 w-4 shrink-0" /><span className="sm:hidden">Call</span><span className="hidden sm:inline">{site.contact.phone}</span>
         </a>
       </PageHero>
       <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }]} />
@@ -45,9 +47,9 @@ export default function ContactPage() {
             <div className="mt-8"><ContactForm /></div>
             <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-outline-variant/60 pt-6">
               <span className="text-[14px] text-ink-muted">Prefer to chat?</span>
-              <WhatsAppButton context="Contact page" />
+              <WhatsAppButton />
               <a href={`tel:${site.contact.phoneHref}`} className="btn btn-outline">
-                <Icon name="phone" className="h-4 w-4" /> {site.contact.phone}
+                <Icon name="phone" className="h-4 w-4 shrink-0" /><span className="sm:hidden">Call</span><span className="hidden sm:inline">{site.contact.phone}</span>
               </a>
             </div>
           </div>
@@ -71,18 +73,20 @@ export default function ContactPage() {
                     <a href={`tel:${site.contact.phoneHref}`} className="mt-1 block text-[15px] text-navy hover:text-gold-700">{site.contact.phone}</a>
                   </div>
                 </li>
-                <li className="flex gap-4">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-navy text-gold"><Icon name="mail" className="h-5 w-5" /></span>
-                  <div>
-                    <div className="text-[13px] font-semibold uppercase tracking-label text-gold-700">Email</div>
-                    <a href={`mailto:${site.contact.email}`} className="mt-1 block break-all text-[15px] text-navy hover:text-gold-700">{site.contact.email}</a>
-                  </div>
-                </li>
+                {site.contact.email && (
+                  <li className="flex gap-4">
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-navy text-gold"><Icon name="mail" className="h-5 w-5" /></span>
+                    <div>
+                      <div className="text-[13px] font-semibold uppercase tracking-label text-gold-700">Email</div>
+                      <a href={`mailto:${site.contact.email}`} className="mt-1 block break-all text-[15px] text-navy hover:text-gold-700">{site.contact.email}</a>
+                    </div>
+                  </li>
+                )}
                 <li className="flex gap-4">
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-navy text-gold"><Icon name="whatsapp" className="h-5 w-5" /></span>
                   <div>
                     <div className="text-[13px] font-semibold uppercase tracking-label text-gold-700">WhatsApp</div>
-                    <a href={whatsappHref('Contact page')} target="_blank" rel="noopener noreferrer" className="mt-1 block text-[15px] text-navy hover:text-gold-700">Message us</a>
+                    <WhatsAppLink className="mt-1 block text-[15px] text-navy hover:text-gold-700">Message us</WhatsAppLink>
                   </div>
                 </li>
               </ul>

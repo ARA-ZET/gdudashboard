@@ -48,7 +48,7 @@ export function localBusinessSchema() {
     description: site.description,
     url: site.url,
     telephone: contact.phone,
-    email: contact.email,
+    ...(contact.email ? { email: contact.email } : {}),
     image: `${site.url}/images/og.png`,
     logo: `${site.url}/logo/gdulogo-long-dark.png`,
     foundingDate: String(site.foundedYear),

@@ -4,10 +4,12 @@ import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState, type ReactNode } from 'react';
 import { useAuth } from './AuthProvider';
+import { subscribeUnreadLeadCount } from '@/lib/db';
 import { Icon, type IconName } from '@/components/Icon';
 
 const nav: { href: string; label: string; icon: IconName }[] = [
   { href: '/admin', label: 'Dashboard', icon: 'building' },
+  { href: '/admin/leads', label: 'Enquiries', icon: 'mail' },
   { href: '/admin/clients', label: 'Clients', icon: 'crown' },
   { href: '/admin/quotes', label: 'Quotes', icon: 'layers' },
   { href: '/admin/invoices', label: 'Invoices', icon: 'verified' },
@@ -19,6 +21,10 @@ export function AdminShell({ title, actions, children }: { title: string; action
   const router = useRouter();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [unread, setUnread] = useState(0);
+
+  // Only subscribe once signed in — the rules deny reads to anonymous users.
+  useEffect(() => (user ? subscribeUnreadLeadCount(setUnread) : undefined), [user]);
 
   useEffect(() => {
     if (!loading && !user) router.replace('/admin/login');
@@ -51,7 +57,16 @@ export function AdminShell({ title, actions, children }: { title: string; action
             return (
               <Link key={n.href} href={n.href} onClick={() => setOpen(false)}
                 className={`mb-0.5 flex items-center gap-2.5 rounded-md px-3 py-2 text-[13px] font-medium transition-colors ${active ? 'bg-gold text-navy' : 'text-white/75 hover:bg-white/10 hover:text-white'}`}>
-                <Icon name={n.icon} className="h-4 w-4 shrink-0" /> {n.label}
+                <Icon name={n.icon} className="h-4 w-4 shrink-0" />
+                <span className="flex-1">{n.label}</span>
+                {n.href === '/admin/leads' && unread > 0 && (
+                  <span
+                    className={`rounded px-1.5 py-0.5 text-[11px] font-bold ${active ? 'bg-navy text-gold' : 'bg-gold text-navy'}`}
+                    aria-label={`${unread} unopened`}
+                  >
+                    {unread}
+                  </span>
+                )}
               </Link>
             );
           })}

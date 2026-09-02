@@ -8,6 +8,34 @@ service cloud.firestore {
       return request.auth != null;
     }
 
+    // Quote requests from the public contact form.
+    //
+    // Anyone may CREATE one (the form is public and unauthenticated), but only
+    // staff may ever read, edit or delete. The shape check keeps the collection
+    // from being used as free storage: known fields only, capped lengths, and a
+    // server-set timestamp that a client cannot backdate.
+    // `service`, `read` and `readAt` collide with rules keywords, so every field
+    // is read with bracket access rather than dot notation.
+    function validLead() {
+      let d = request.resource.data;
+      return d.keys().hasOnly(['name','email','phone','service','property','message','pageUrl','read','readAt','createdAt'])
+        && d['name'] is string && d['name'].size() > 0 && d['name'].size() <= 120
+        && (!('email' in d)    || (d['email'] is string    && d['email'].size()    <= 200))
+        && (!('phone' in d)    || (d['phone'] is string    && d['phone'].size()    <= 40))
+        && (!('service' in d)  || (d['service'] is string  && d['service'].size()  <= 80))
+        && (!('property' in d) || (d['property'] is string && d['property'].size() <= 40))
+        && (!('message' in d)  || (d['message'] is string  && d['message'].size()  <= 4000))
+        && (!('pageUrl' in d)  || (d['pageUrl'] is string  && d['pageUrl'].size()  <= 300))
+        && d['read'] == false
+        && d['readAt'] == null
+        && d['createdAt'] == request.time;
+    }
+
+    match /leads/{id} {
+      allow create: if validLead();
+      allow read, update, delete: if isStaff();
+    }
+
     match /clients/{id}   { allow read, write: if isStaff(); }
     match /quotes/{id}    { allow read, write: if isStaff(); }
     match /invoices/{id}  { allow read, write: if isStaff(); }

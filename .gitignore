@@ -33,3 +33,6 @@ apphosting.emulator.local.yaml
 # archived Flutter app (kept locally, not deployed)
 _flutter_archive/
 golden-diamond-site.tar.gz
+
+# Original camera/WhatsApp drops — optimised copies live in public/images/work
+public/pictures/

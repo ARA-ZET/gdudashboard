@@ -3,11 +3,11 @@ import { NextResponse } from 'next/server';
 /**
  * Quote-request endpoint.
  *
- * Emails each submission to the business via Resend when RESEND_API_KEY and
- * CONTACT_TO are set (see README "Contact form"); always logs to the server
- * console (visible in Firebase App Hosting logs) as a fallback. The front-end
- * also shows direct phone / WhatsApp / email options on success, so no lead is
- * ever lost — even before the email key is configured.
+ * Notification only. The browser has already written the enquiry to the
+ * `leads` Firestore collection, which is the record of it and what the admin
+ * Enquiries inbox reads. This route emails the business a copy via Resend when
+ * RESEND_API_KEY and CONTACT_TO are set, and always logs to the App Hosting
+ * console so a lead is recoverable even if both email and Firestore fail.
  */
 export async function POST(req: Request) {
   let data: Record<string, unknown>;
@@ -15,6 +15,12 @@ export async function POST(req: Request) {
     data = await req.json();
   } catch {
     return NextResponse.json({ ok: false, error: 'invalid_json' }, { status: 400 });
+  }
+
+  // Honeypot: the real form never sends a value here. Answer 200 so a bot
+  // cannot tell it was rejected, but do nothing with the submission.
+  if (String(data['company-website'] ?? '').trim()) {
+    return NextResponse.json({ ok: true, delivered: false });
   }
 
   const name = String(data.name ?? '').trim();
@@ -32,11 +38,16 @@ export async function POST(req: Request) {
     service: String(data.service ?? ''),
     property: String(data.property ?? ''),
     message: String(data.message ?? ''),
+    pageUrl: String(data.pageUrl ?? ''),
     receivedAt: new Date().toISOString(),
   };
 
+  // The browser writes the lead to Firestore before calling this route, so a
+  // false here means the enquiry exists only in these logs and in the email.
+  const storedInFirestore = data.stored === true;
+
   // Always logged so leads are recoverable from App Hosting logs.
-  console.log('[quote-request]', JSON.stringify(submission));
+  console.log('[quote-request]', JSON.stringify({ ...submission, storedInFirestore }));
 
   // Email the lead to the business via Resend when configured.
   const apiKey = process.env.RESEND_API_KEY;
@@ -56,7 +67,8 @@ export async function POST(req: Request) {
         to,
         replyTo: submission.email || undefined,
         subject: `New quote request from ${submission.name} — ${submission.service || 'Upholstery'} (${submission.property})`,
-        text: Object.entries(submission).map(([k, v]) => `${k}: ${v}`).join('\n'),
+        text: Object.entries(submission).map(([k, v]) => `${k}: ${v}`).join('\n')
+          + (storedInFirestore ? '\n\nSaved to the admin Enquiries inbox.' : '\n\nNOT saved to Firestore — this email is the only copy.'),
       });
       return NextResponse.json({ ok: true, delivered: true });
     } catch (err) {

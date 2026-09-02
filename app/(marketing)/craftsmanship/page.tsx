@@ -63,11 +63,12 @@ export default function CraftsmanshipPage() {
 
       <PageHero
         eyebrow="The architecture of comfort"
-        title={<>Where heritage technique meets <span className="text-gold">modern durability</span></>}
+        title={<>How we build <span className="text-gold">to last</span></>}
         intro="Every Golden Diamond piece is engineered from the frame out — traditional methods, scientifically tested materials and master hand-finishing that together earn our lifetime frame guarantee."
+        photo={photos.diamondHeadboard}
       >
-        <Link href="/contact" className="btn btn-gold">Commission a Piece <Icon name="arrow" className="h-4 w-4" /></Link>
-        <WhatsAppButton context="Craftsmanship page" intent="I’d like to commission a piece." />
+        <Link href="/contact" className="btn btn-gold"><span className="sm:hidden">Commission</span><span className="hidden sm:inline">Commission a Piece</span> <Icon name="arrow" className="h-4 w-4" /></Link>
+        <WhatsAppButton intent="I’d like to commission a piece." />
       </PageHero>
       <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Craftsmanship', path: '/craftsmanship' }]} />
 
@@ -77,7 +78,7 @@ export default function CraftsmanshipPage() {
           <div key={p.title} className="container-x">
             <div className={`grid items-center gap-12 lg:grid-cols-2 ${idx % 2 ? 'lg:[&>*:first-child]:order-2' : ''}`}>
               <Reveal className="overflow-hidden rounded-xl shadow-ambient ring-1 ring-black/5">
-                <Photo id={p.img} variant={p.v} alt={`${p.title} — Golden Diamond upholstery craftsmanship, Cape Town`} className="aspect-[5/4] w-full" />
+                <Photo photo={p.img} variant={p.v} alt={`${p.title} — Golden Diamond upholstery craftsmanship, Cape Town`} className="aspect-[5/4] w-full" />
               </Reveal>
               <div>
                 <SectionHeading eyebrow={p.eyebrow} title={p.title} intro={p.body} />
@@ -110,23 +111,27 @@ export default function CraftsmanshipPage() {
       <section className="section">
         <div className="container-x grid gap-8 lg:grid-cols-2">
           <Reveal className="card p-8">
-            <span className="grid h-12 w-12 place-items-center rounded-md bg-navy text-gold"><Icon name="crown" className="h-6 w-6" /></span>
-            <h3 className="mt-5 text-h3">Meet the artisans</h3>
-            <p className="mt-3 text-[15px] leading-relaxed text-ink-muted">
+            <div className="flex items-center gap-4">
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-md bg-navy text-gold"><Icon name="crown" className="h-6 w-6" /></span>
+              <h3 className="text-h3">Meet the artisans</h3>
+            </div>
+            <p className="mt-4 text-[15px] leading-relaxed text-ink-muted">
               Behind every custom piece is a team of dedicated South African craftspeople. Many of our master upholsterers come from families with deep roots in the Cape’s furniture-making heritage, passing down specialised techniques over decades — precision and passion in equal measure.
             </p>
           </Reveal>
           <Reveal delay={100} className="card p-8">
-            <span className="grid h-12 w-12 place-items-center rounded-md bg-navy text-gold"><Icon name="leaf" className="h-6 w-6" /></span>
-            <h3 className="mt-5 text-h3">Ethical sourcing</h3>
-            <p className="mt-3 text-[15px] leading-relaxed text-ink-muted">
+            <div className="flex items-center gap-4">
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-md bg-navy text-gold"><Icon name="leaf" className="h-6 w-6" /></span>
+              <h3 className="text-h3">Ethical sourcing</h3>
+            </div>
+            <p className="mt-4 text-[15px] leading-relaxed text-ink-muted">
               We partner with sustainable forestry initiatives for responsibly harvested Cape timber, and source top-grain leathers from renowned local tanneries — ensuring environmentally responsible manufacturing and ethical supply chains across every material we touch.
             </p>
           </Reveal>
         </div>
       </section>
 
-      <QuoteCTA context="Craftsmanship page" />
+      <QuoteCTA />
     </>
   );
 }

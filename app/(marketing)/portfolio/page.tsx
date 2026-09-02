@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { projects } from '@/lib/content';
 import { pageMeta, breadcrumbSchema } from '@/lib/seo';
+import { photos } from '@/lib/photos';
 import { Icon } from '@/components/Icon';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { Reveal } from '@/components/Reveal';
@@ -17,9 +18,9 @@ export const metadata: Metadata = pageMeta({
 });
 
 const collections = [
-  { name: 'Residential', tagline: 'Enduring elegance for the private home — restorations and custom-made pieces for homes across the Cape.' },
-  { name: 'Commercial', tagline: 'Contract-grade craft for hotels, restaurants and venues that never stop.' },
-  { name: 'Heritage', tagline: 'Preserving history through meticulous, period-correct restoration.' },
+  { name: 'Sofas & Seating', tagline: 'Curved sofas, benches and lounge pieces built on shaped frames and finished by hand.' },
+  { name: 'Headboards & Beds', tagline: 'Made-to-measure headboards and bed bases — buttoned, channel-tufted or woven.' },
+  { name: 'Chairs', tagline: 'Tub chairs and occasional seating, upholstered to order.' },
 ];
 
 export default function PortfolioPage() {
@@ -31,9 +32,10 @@ export default function PortfolioPage() {
         eyebrow="Gallery of prestige"
         title={<>A portfolio built on <span className="text-gold">proof</span></>}
         intro="Each project below showcases a specific craftsmanship challenge — the materials, techniques and problem-solving behind pieces that preserve heritage and elevate modern spaces."
+        photo={photos.boutiqueInterior}
       >
-        <Link href="/contact" className="btn btn-gold">Start Your Project <Icon name="arrow" className="h-4 w-4" /></Link>
-        <WhatsAppButton context="Portfolio page" intent="I saw your portfolio and would like a quote." />
+        <Link href="/contact" className="btn btn-gold"><span className="sm:hidden">Start Now</span><span className="hidden sm:inline">Start Your Project</span> <Icon name="arrow" className="h-4 w-4" /></Link>
+        <WhatsAppButton intent="I saw your portfolio and would like a quote." />
       </PageHero>
       <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Portfolio', path: '/portfolio' }]} />
 
@@ -55,14 +57,14 @@ export default function PortfolioPage() {
             return (
               <div key={col.name}>
                 <div className="mb-8 max-w-2xl">
-                  <h2 className="text-h2">The {col.name} Collection</h2>
+                  <h2 className="text-h2">{col.name}</h2>
                   <p className="mt-3 text-[16px] leading-relaxed text-ink-muted">{col.tagline}</p>
                 </div>
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                   {items.map((p, i) => (
                     <Reveal key={p.slug} delay={i * 80} className="card group flex flex-col overflow-hidden">
                       <div className="relative">
-                        <Photo id={p.image} variant={p.swatch} alt={`${p.title} — ${p.category.toLowerCase()} upholstery project by Golden Diamond Upholstery, Cape Town`} className="aspect-[4/3] w-full transition-transform duration-500 group-hover:scale-[1.03]" />
+                        <Photo photo={p.image} variant={p.swatch} alt={`${p.title} — ${p.category.toLowerCase()} upholstery project by Golden Diamond Upholstery, Cape Town`} className="aspect-[4/3] w-full transition-transform duration-500 group-hover:scale-[1.03]" />
                         <span className="absolute left-3 top-3 rounded bg-navy/90 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-label text-gold">{p.category}</span>
                       </div>
                       <div className="flex flex-1 flex-col p-6">
@@ -86,7 +88,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <QuoteCTA context="Portfolio page" title="Let’s build your vision" intro="Whether it’s restoring a cherished heirloom or outfitting a flagship venue, our master upholsterers are ready to bring your project to life." />
+      <QuoteCTA title="Let’s build your vision" intro="Whether it’s restoring a cherished heirloom or outfitting a flagship venue, our master upholsterers are ready to bring your project to life." />
     </>
   );
 }

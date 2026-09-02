@@ -1,32 +1,37 @@
 'use client';
 import { useState } from 'react';
-import { stock } from '@/lib/photos';
+import type { SitePhoto } from '@/lib/photos';
 import { Swatch } from './Swatch';
 
 /**
- * Renders a stock/real photo with a graceful fallback to the on-brand fabric
- * texture panel if the image fails to load. Use `id` for an Unsplash id (from
- * lib/photos) or `src` for a direct/local URL.
+ * Renders one of our own photographs, falling back to the on-brand fabric
+ * texture panel if the file ever fails to load.
+ *
+ * Pass `photo` (an entry from lib/photos) to get its intrinsic width/height and
+ * default alt text, or `src` + `alt` for a one-off image. The width/height
+ * attributes matter: App Hosting serves these files unoptimised, so the browser
+ * needs the intrinsic size to reserve space and avoid layout shift, which is a
+ * Core Web Vitals signal.
  */
 export function Photo({
-  id,
+  photo,
   src,
   alt,
   variant = 'navy',
   className = '',
-  width = 1200,
   priority = false,
 }: {
-  id?: string;
+  photo?: SitePhoto;
   src?: string;
-  alt: string;
+  /** Overrides the photo's own alt text when this instance needs different wording. */
+  alt?: string;
   variant?: string;
   className?: string;
-  width?: number;
   priority?: boolean;
 }) {
   const [failed, setFailed] = useState(false);
-  const url = src ?? (id ? stock(id, width) : undefined);
+  const url = src ?? photo?.src;
+  const altText = alt ?? photo?.alt ?? '';
 
   if (failed || !url) {
     return <Swatch variant={variant} className={className} />;
@@ -35,8 +40,11 @@ export function Photo({
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src={url}
-      alt={alt}
+      alt={altText}
+      width={photo?.width}
+      height={photo?.height}
       loading={priority ? 'eager' : 'lazy'}
+      fetchPriority={priority ? 'high' : undefined}
       decoding="async"
       onError={() => setFailed(true)}
       className={`${className} object-cover`}

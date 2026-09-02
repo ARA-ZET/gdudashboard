@@ -40,12 +40,13 @@ export default function CommercialPage() {
 
       <PageHero
         eyebrow="Commercial excellence"
-        title={<>Engineered for scale. <span className="text-gold">Crafted for prestige.</span></>}
+        title={<>Upholstery for <span className="text-gold">hotels &amp; venues</span></>}
         intro="High-performance upholstery for Cape Town’s leading hotels, restaurants and vineyards — unmatched high-traffic durability for tourism-heavy venues, without compromising on finish."
+        photo={photos.basketweaveHeadboard}
       >
-        <Link href="/contact" className="btn btn-gold">Discuss Your Project <Icon name="arrow" className="h-4 w-4" /></Link>
-        <WhatsAppButton context="Commercial page" intent="I’d like to discuss a commercial upholstery project." />
-        <Link href="/portfolio" className="btn btn-outline-light">View case studies</Link>
+        <Link href="/contact" className="btn btn-gold"><span className="sm:hidden">Enquire</span><span className="hidden sm:inline">Discuss Your Project</span> <Icon name="arrow" className="h-4 w-4" /></Link>
+        <WhatsAppButton intent="I’d like to discuss a commercial upholstery project." />
+        <Link href="/portfolio" className="btn btn-outline-light"><span className="sm:hidden">Case studies</span><span className="hidden sm:inline">View case studies</span></Link>
       </PageHero>
       <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Commercial', path: '/commercial' }]} />
 
@@ -56,9 +57,11 @@ export default function CommercialPage() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {standards.map((s, i) => (
               <Reveal key={s.t} delay={i * 70} className="card p-7">
-                <span className="grid h-12 w-12 place-items-center rounded-md bg-navy text-gold"><Icon name={s.icon as any} className="h-6 w-6" /></span>
-                <h3 className="mt-5 text-[16px] font-semibold text-navy">{s.t}</h3>
-                <p className="mt-2 text-[14px] leading-relaxed text-ink-muted">{s.d}</p>
+                <div className="flex items-center gap-4">
+                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-md bg-navy text-gold"><Icon name={s.icon as any} className="h-6 w-6" /></span>
+                  <h3 className="text-[16px] font-semibold text-navy">{s.t}</h3>
+                </div>
+                <p className="mt-4 text-[14px] leading-relaxed text-ink-muted">{s.d}</p>
               </Reveal>
             ))}
           </div>
@@ -72,7 +75,7 @@ export default function CommercialPage() {
           <div className="grid gap-6 lg:grid-cols-3">
             {sectors.map((s, i) => (
               <Reveal key={s.t} delay={i * 80} className="card overflow-hidden">
-                <Photo id={s.img} variant={s.v} alt={`${s.t} commercial upholstery by Golden Diamond, Cape Town`} className="aspect-[16/9] w-full" />
+                <Photo photo={s.img} variant={s.v} alt={`${s.t} commercial upholstery by Golden Diamond, Cape Town`} className="aspect-[16/9] w-full" />
                 <div className="p-7">
                   <h3 className="text-h3">{s.t}</h3>
                   <p className="mt-3 text-[15px] leading-relaxed text-ink-muted">{s.d}</p>
@@ -113,7 +116,6 @@ export default function CommercialPage() {
       </section>
 
       <QuoteCTA
-        context="Commercial page"
         title="Transform your commercial space"
         intro="Whether it’s a multi-floor hotel refit or a flagship tasting room, our commercial team will manage it from prototype to installation."
       />

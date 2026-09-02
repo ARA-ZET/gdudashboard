@@ -39,7 +39,11 @@ export const site = {
     phoneHref: '27815723431',
     whatsapp: '+27 81 572 3431',
     whatsappHref: '27815723431',
-    email: 'hello@goldendiamondupholstery.co.za', // PLACEHOLDER — no email supplied yet; update or remove
+    // Blank until a mailbox exists on the domain — the MX record currently
+    // points at the web server, so anything sent here bounces. Every place that
+    // shows an email address hides it while this is empty; fill it in to
+    // restore the footer row, the contact card and the schema.org field.
+    email: '',
     address: {
       street: 'Khayelitsha Training Centre, Shop 2, Block C',
       area: '50 Lwandle Rd, Village 2 North',

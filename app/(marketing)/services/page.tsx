@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { site } from '@/lib/site';
 import { services, faqs } from '@/lib/content';
 import { pageMeta, faqSchema, serviceSchema, breadcrumbSchema } from '@/lib/seo';
+import { photos } from '@/lib/photos';
 import { Icon } from '@/components/Icon';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { Reveal } from '@/components/Reveal';
@@ -28,12 +29,13 @@ export default function ServicesPage() {
 
       <PageHero
         eyebrow="Upholstery repair & services"
-        title={<>Every service to restore, refresh <span className="text-gold">or reimagine</span> your furniture</>}
+        title={<>Upholstery services in <span className="text-gold">Cape Town</span></>}
         intro="From a quick seam repair to a full custom build, our Cape Town workshop covers every kind of upholstery work — for homes and businesses alike."
+        photo={photos.velvetSeating}
       >
-        <Link href="/contact" className="btn btn-gold">Get a Free Quote <Icon name="arrow" className="h-4 w-4" /></Link>
-        <WhatsAppButton context="Services page" />
-        <a href={`tel:${site.contact.phoneHref}`} className="btn btn-outline-light"><Icon name="phone" className="h-4 w-4" /> {site.contact.phone}</a>
+        <Link href="/contact" className="btn btn-gold"><span className="sm:hidden">Free Quote</span><span className="hidden sm:inline">Get a Free Quote</span> <Icon name="arrow" className="h-4 w-4" /></Link>
+        <WhatsAppButton />
+        <a href={`tel:${site.contact.phoneHref}`} className="btn btn-outline-light"><Icon name="phone" className="h-4 w-4 shrink-0" /><span className="sm:hidden">Call</span><span className="hidden sm:inline">{site.contact.phone}</span></a>
       </PageHero>
       <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Services', path: '/services' }]} />
 
@@ -98,7 +100,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <QuoteCTA context="Services page" />
+      <QuoteCTA />
     </>
   );
 }

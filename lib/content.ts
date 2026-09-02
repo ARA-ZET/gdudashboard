@@ -254,70 +254,162 @@ export const publishedTestimonials = testimonials.filter((t) => !t.placeholder);
 export const hasTestimonials = publishedTestimonials.length > 0;
 
 /**
- * PLACEHOLDER portfolio projects — replace with your real projects and photos.
- * Each `swatch` drives an on-brand fabric-texture tile until a real image is added
- * at /public/images/portfolio/<slug>.jpg.
+ * Real pieces made by Golden Diamond Upholstery, grouped by what they are.
+ *
+ * Descriptions state only what is visible in the photograph — the form, the
+ * fabric type and the finish. No client names, locations or material claims are
+ * asserted, because none of those can be verified from the images. Add them
+ * yourself where you know them; do not invent them.
  */
 export const projects = [
+  // ---- Sofas & seating ----
   {
-    slug: 'constantia-estate',
-    title: 'Constantia Estate Restoration',
-    category: 'Residential',
-    swatch: 'emerald',
-    image: photos.velvetSeating,
-    summary:
-      'A multi-piece restoration of mid-century heirlooms for a historic wine-estate home — Italian mohair velvet over traditional hand-tied coil-spring construction.',
-    materials: ['Italian mohair velvet', 'Hand-tied coil springs', 'Kiln-dried oak frame'],
-  },
-  {
-    slug: 'camps-bay-villa',
-    title: 'Camps Bay Villa',
-    category: 'Residential',
-    swatch: 'navy',
-    image: photos.loungeSuite,
-    summary:
-      'Custom lounging areas engineered for coastal living — UV-resistant fabrics and high-density contract-grade foam that keep their structure year-round.',
-    materials: ['UV-resistant weave', 'High-density foam', 'Marine-grade thread'],
-  },
-  {
-    slug: 'boutique-hotel-refit',
-    title: 'Boutique Hotel Refit',
-    category: 'Commercial',
-    swatch: 'gold',
-    image: photos.boutiqueInterior,
-    summary:
-      'A full seating refit for a City Bowl boutique hotel — lobby statement pieces and 40+ guest-suite chairs in easy-clean, stain-resistant contract fabrics.',
-    materials: ['Crypton contract fabric', '100k+ double-rub weave', 'Reinforced suspension'],
-  },
-  {
-    slug: 'winelands-tasting-room',
-    title: 'Winelands Tasting Room',
-    category: 'Commercial',
-    swatch: 'sand',
-    image: photos.diningSeating,
-    summary:
-      'Custom dining chairs in historically accurate silk for a Stellenbosch wine estate — custom-milled edge bindings on every single chair.',
-    materials: ['Custom-woven silk', 'Custom edge binding', 'Solid hardwood frame'],
-  },
-  {
-    slug: 'cape-dutch-heirloom',
-    title: 'Cape Dutch Heirloom',
-    category: 'Heritage',
-    swatch: 'rust',
-    image: photos.armchairDetail,
-    summary:
-      'Sympathetic restoration of an antique yellowwood-framed chair — traditional foundation rebuilt beneath a hard-wearing textured rust wool, heritage intact.',
-    materials: ['Textured wool', 'Traditional coir & hessian', 'Yellowwood frame repair'],
-  },
-  {
-    slug: 'waterfront-penthouse',
-    title: 'Waterfront Penthouse',
-    category: 'Residential',
+    slug: 'cream-scalloped-curved-sofa',
+    title: 'Cream scalloped curved sofa',
+    category: 'Sofas & Seating',
     swatch: 'bone',
+    image: photos.heroSofa,
+    summary: 'A curved two-seater with a scalloped shell back, built on a shaped frame and finished in a soft cream weave over slim metal legs.',
+    materials: ['Scalloped shell back', 'Shaped curved frame', 'Metal legs'],
+  },
+  {
+    slug: 'gold-velvet-curved-sofa',
+    title: 'Gold velvet curved sofa',
+    category: 'Sofas & Seating',
+    swatch: 'gold',
+    image: photos.velvetSeating,
+    summary: 'A deep round-backed sofa in gold crushed velvet, with a continuous curved seat and rolled arm that wraps the full width of the piece.',
+    materials: ['Crushed velvet', 'Continuous curved seat', 'Tapered legs'],
+  },
+  {
+    slug: 'olive-green-crescent-sofa',
+    title: 'Olive green crescent sofa',
+    category: 'Sofas & Seating',
+    swatch: 'emerald',
+    image: photos.loungeSuite,
+    summary: 'A crescent-shaped sofa in olive velvet, shaped as a single sweeping curve with a bolstered back roll and no visible seams across the front.',
+    materials: ['Olive velvet', 'Crescent frame', 'Bolstered back roll'],
+  },
+  {
+    slug: 'charcoal-curved-sofa',
+    title: 'Charcoal curved sofa',
+    category: 'Sofas & Seating',
+    swatch: 'navy',
     image: photos.modernSofa,
-    summary:
-      'A low-profile modular sofa in high-density Italian bouclé — razor-sharp architectural lines with plush, sag-free comfort that holds over time.',
-    materials: ['Italian bouclé', 'Multi-density foam core', 'Concealed steel frame'],
+    summary: 'A low curved sofa in charcoal, photographed in the apartment it was delivered to — a soft profile with a deep seat and a rounded back.',
+    materials: ['Charcoal weave', 'Low curved profile', 'Deep seat'],
+  },
+  {
+    slug: 'navy-buttoned-velvet-sofa',
+    title: 'Navy buttoned velvet sofa',
+    category: 'Sofas & Seating',
+    swatch: 'navy',
+    image: photos.diningSeating,
+    summary: 'A navy velvet sofa with deep buttoning through the back and a contrast trim along the arm, built on a welded metal base.',
+    materials: ['Navy velvet', 'Deep buttoning', 'Welded metal base'],
+  },
+  {
+    slug: 'grey-channel-tufted-bench',
+    title: 'Grey channel-tufted bench',
+    category: 'Sofas & Seating',
+    swatch: 'rust',
+    image: photos.interiorLounge,
+    summary: 'A long bench seat in grey crushed velvet, channel-tufted across the back and seat, raised on slim brass-finish legs.',
+    materials: ['Crushed velvet', 'Channel tufting', 'Brass-finish legs'],
+  },
+  {
+    slug: 'velvet-sofa-collection',
+    title: 'Velvet sofa collection',
+    category: 'Sofas & Seating',
+    swatch: 'emerald',
+    image: photos.boutiqueInterior,
+    summary: 'Several channel-tufted velvet pieces photographed together — teal, navy and gold — showing the same construction carried across a range of colours.',
+    materials: ['Channel tufting', 'Velvet range', 'Matched construction'],
+  },
+  {
+    slug: 'cream-sofa-and-bed-base',
+    title: 'Cream sofa and matching bed base',
+    category: 'Sofas & Seating',
+    swatch: 'bone',
+    image: photos.livingRoom,
+    summary: 'A curved cream sofa made alongside a matching upholstered bed base, both finished in the same fabric so the room reads as one commission.',
+    materials: ['Matched fabric', 'Curved sofa', 'Upholstered bed base'],
+  },
+
+  // ---- Headboards & beds ----
+  {
+    slug: 'basketweave-headboard',
+    title: 'Basket-weave headboard',
+    category: 'Headboards & Beds',
+    swatch: 'rust',
+    image: photos.basketweaveHeadboard,
+    summary: 'A wall-width headboard in grey crushed velvet, hand-woven into a basket pattern with plug points set into the base panels.',
+    materials: ['Basket-weave panels', 'Crushed velvet', 'Built-in plug points'],
+  },
+  {
+    slug: 'cream-channel-tufted-bed',
+    title: 'Cream channel-tufted bed',
+    category: 'Headboards & Beds',
+    swatch: 'bone',
+    image: photos.tuftedBed,
+    summary: 'A full bed suite in cream — tall channel-tufted headboard with a matching padded base surround, made to the room’s width.',
+    materials: ['Channel tufting', 'Matching base surround', 'Made to measure'],
+  },
+  {
+    slug: 'diamond-buttoned-headboard',
+    title: 'Diamond-buttoned headboard',
+    category: 'Headboards & Beds',
+    swatch: 'navy',
+    image: photos.diamondHeadboard,
+    summary: 'A two-tone headboard in black and cream, diamond-buttoned into a chevron across the centre with piped edges framing the panel.',
+    materials: ['Diamond buttoning', 'Two-tone panels', 'Piped edges'],
+  },
+  {
+    slug: 'grey-buttoned-headboard',
+    title: 'Tall grey buttoned headboard',
+    category: 'Headboards & Beds',
+    swatch: 'rust',
+    image: photos.buttonedHeadboardRoom,
+    summary: 'A tall buttoned headboard in grey, extending well above the bed and wrapping into side wings that frame the bed head.',
+    materials: ['Deep buttoning', 'Extended height', 'Wrapped side wings'],
+  },
+  {
+    slug: 'cream-upholstered-bed-suite',
+    title: 'Cream upholstered bed suite',
+    category: 'Headboards & Beds',
+    swatch: 'bone',
+    image: photos.upholsteredBedSuite,
+    summary: 'A cream bed suite with a channel-tufted headboard and a scalloped base, photographed in place after delivery.',
+    materials: ['Channel-tufted headboard', 'Scalloped base', 'Cream weave'],
+  },
+  {
+    slug: 'headboard-installation',
+    title: 'Headboard fitting on site',
+    category: 'Headboards & Beds',
+    swatch: 'navy',
+    image: photos.workshopDetail,
+    summary: 'Fitting a diamond-buttoned headboard in the customer’s bedroom — headboards are hung and levelled on site rather than left leaning.',
+    materials: ['On-site fitting', 'Levelled and hung', 'Diamond buttoning'],
+  },
+
+  // ---- Chairs ----
+  {
+    slug: 'gold-velvet-tub-armchair',
+    title: 'Gold velvet tub armchair',
+    category: 'Chairs',
+    swatch: 'gold',
+    image: photos.armchairDetail,
+    summary: 'A round tub armchair in gold crushed velvet, with a single wrapped back and seat cushion, raised on a thin black frame.',
+    materials: ['Crushed velvet', 'Wrapped tub back', 'Slim metal frame'],
+  },
+  {
+    slug: 'cream-scalloped-tub-chair',
+    title: 'Cream scalloped tub chair',
+    category: 'Chairs',
+    swatch: 'bone',
+    image: photos.fabricChair,
+    summary: 'A wide scalloped tub chair in cream, with a shell-shaped back, a loose scatter cushion and a deep rounded seat.',
+    materials: ['Scalloped shell back', 'Loose scatter cushion', 'Deep rounded seat'],
   },
 ];
 
