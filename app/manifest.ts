@@ -11,8 +11,11 @@ export default function manifest(): MetadataRoute.Manifest {
     background_color: '#fbf9f8',
     theme_color: '#041632',
     icons: [
+      { src: '/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
       { src: '/icon.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
-      { src: '/favicon.svg', sizes: 'any', type: 'image/svg+xml' },
+      // Android may crop an installed icon to a circle; the maskable variant
+      // keeps the emblem inside that safe area.
+      { src: '/icon-maskable.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
     ],
   };
 }

@@ -13,9 +13,16 @@ export const metadata: Metadata = {
   authors: [{ name: site.name }],
   creator: site.name,
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large' } },
+  // favicon.svg is deliberately not listed: it draws a generic diamond outline
+  // rather than the real emblem, and browsers prefer an SVG icon over PNG when
+  // both are offered, so declaring it would override the actual logo.
   icons: {
-    icon: [{ url: '/icon.png', type: 'image/png' }, { url: '/favicon.svg', type: 'image/svg+xml' }],
-    apple: '/icon.png',
+    icon: [
+      { url: '/favicon.ico', sizes: '48x48 32x32 16x16' },
+      { url: '/icon-192.png', type: 'image/png', sizes: '192x192' },
+      { url: '/icon.png', type: 'image/png', sizes: '512x512' },
+    ],
+    apple: [{ url: '/apple-icon.png', type: 'image/png', sizes: '180x180' }],
   },
   openGraph: {
     type: 'website', locale: 'en_ZA', url: site.url, siteName: site.name,
