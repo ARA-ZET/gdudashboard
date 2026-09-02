@@ -1,6 +1,20 @@
 import type { Metadata } from 'next';
 import { site } from './site';
 
+/**
+ * Absolute URL for a route.
+ *
+ * The root is emitted WITHOUT a trailing slash, to match what Next puts in
+ * `<link rel="canonical">`: it strips the trailing slash from metadata URLs
+ * unless `trailingSlash: true` is set in next.config. Sitemap entries and
+ * breadcrumb items therefore have to spell the root the same way, or the
+ * sitemap advertises a URL the page itself does not claim as canonical.
+ * Google normalises the two spellings to the same URL either way.
+ */
+export function absoluteUrl(path: string): string {
+  return path === '/' || path === '' ? site.url : `${site.url}${path}`;
+}
+
 type PageMetaInput = {
   title: string;
   description: string;
@@ -9,7 +23,7 @@ type PageMetaInput = {
 
 /** Build consistent per-page metadata (title, canonical, Open Graph, Twitter). */
 export function pageMeta({ title, description, path }: PageMetaInput): Metadata {
-  const url = `${site.url}${path === '/' ? '' : path}`;
+  const url = absoluteUrl(path);
   // Home uses an absolute title (bypasses the layout template); inner pages pass
   // the bare page title and let the root template append the brand exactly once.
   const titleField = path === '/' ? { absolute: site.seoTitle } : title;
@@ -113,7 +127,7 @@ export function breadcrumbSchema(items: { name: string; path: string }[]) {
       '@type': 'ListItem',
       position: i + 1,
       name: it.name,
-      item: `${site.url}${it.path === '/' ? '' : it.path}`,
+      item: absoluteUrl(it.path),
     })),
   };
 }

@@ -23,6 +23,17 @@ env:
   # - variable: RESEND_API_KEY
   #   secret: RESEND_API_KEY        # name of the secret in Secret Manager
   #   availability: [RUNTIME]
+  # Google Analytics 4 measurement ID (looks like G-XXXXXXXXXX). Create the
+  # property at analytics.google.com, choose a Web data stream for
+  # https://goldendiamondupholstery.co.za, then paste the ID here and redeploy.
+  # Analytics stays completely inert while this is blank. BUILD availability is
+  # required: NEXT_PUBLIC_* values are inlined into the bundle at build time.
+  - variable: NEXT_PUBLIC_GA_ID
+    value: G-FK0WGZ1FG9
+    availability:
+      - BUILD
+      - RUNTIME
+
   # Where quote requests are emailed. Accepts a comma-separated list, e.g.
   #   value: sales@goldendiamondupholstery.co.za,info@goldendiamondupholstery.co.za
   # NOTE: this address must be on a domain with working MX records — see README.

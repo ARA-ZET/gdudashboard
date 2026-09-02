@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import { site } from '@/lib/site';
 import { Icon } from './Icon';
 import { WhatsAppLink } from './WhatsAppButton';
+import { trackEvent } from './Analytics';
 
 const serviceOptions = [
   'Reupholstery', 'Upholstery repair', 'Headboards & beds', 'Loose covers',
@@ -67,6 +68,18 @@ export function ContactForm() {
       });
     } catch {
       // Notification only — the lead is already saved.
+    }
+
+    // GA4's standard lead event, fired only when the enquiry was really saved,
+    // so the conversion count matches the Enquiries inbox rather than counting
+    // attempts. Outbound WhatsApp and tel: clicks are picked up separately by
+    // GA4 enhanced measurement.
+    if (stored) {
+      trackEvent('generate_lead', {
+        service: form.service || 'unspecified',
+        property_type: form.property,
+        page_url: pageUrl,
+      });
     }
 
     // If neither path worked the customer still needs a way through, so the

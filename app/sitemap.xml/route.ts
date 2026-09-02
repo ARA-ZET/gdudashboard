@@ -1,4 +1,5 @@
 import { site } from '@/lib/site';
+import { absoluteUrl } from '@/lib/seo';
 import { photos, allPhotos, type SitePhoto } from '@/lib/photos';
 
 /**
@@ -37,7 +38,7 @@ export function GET() {
   const lastmod = new Date().toISOString();
   const body = routes
     .map(({ path, priority, images }) => {
-      const loc = xmlEscape(`${site.url}${path}`);
+      const loc = xmlEscape(absoluteUrl(path));
       const imgs = images
         .map((i) => `    <image:image><image:loc>${xmlEscape(`${site.url}${i.src}`)}</image:loc></image:image>`)
         .join('\n');
