@@ -2,6 +2,7 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { JsonLd } from '@/components/JsonLd';
 import { localBusinessSchema } from '@/lib/seo';
+import { Analytics } from '@/components/Analytics';
 
 export default function MarketingLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -13,6 +14,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
       <Header />
       <main id="main">{children}</main>
       <Footer />
+      <Analytics />
     </>
   );
 }

@@ -6,20 +6,25 @@ import { useEffect, useState, type ReactNode } from 'react';
 import { useAuth } from './AuthProvider';
 import { subscribeUnreadLeadCount } from '@/lib/db';
 import { Icon, type IconName } from '@/components/Icon';
+import { site } from '@/lib/site';
 
 const nav: { href: string; label: string; icon: IconName }[] = [
-  { href: '/admin', label: 'Dashboard', icon: 'building' },
-  { href: '/admin/leads', label: 'Enquiries', icon: 'mail' },
-  { href: '/admin/clients', label: 'Clients', icon: 'crown' },
-  { href: '/admin/quotes', label: 'Quotes', icon: 'layers' },
-  { href: '/admin/invoices', label: 'Invoices', icon: 'verified' },
-  { href: '/admin/settings', label: 'Settings', icon: 'ruler' },
+  { href: '/', label: 'Dashboard', icon: 'building' },
+  { href: '/leads', label: 'Enquiries', icon: 'mail' },
+  { href: '/clients', label: 'Clients', icon: 'crown' },
+  { href: '/quotes', label: 'Quotes', icon: 'layers' },
+  { href: '/invoices', label: 'Invoices', icon: 'verified' },
+  { href: '/settings', label: 'Settings', icon: 'ruler' },
 ];
 
 export function AdminShell({ title, actions, children }: { title: string; actions?: ReactNode; children: ReactNode }) {
   const { user, loading, logout } = useAuth();
   const router = useRouter();
-  const pathname = usePathname();
+  // middleware.ts rewrites `app.<domain>/quotes` onto `/admin/quotes`, so the
+  // server renders with the prefixed path while the browser reports the clean
+  // one. Normalising to the clean form keeps the active row stable across
+  // hydration.
+  const pathname = usePathname().replace(/^\/admin(?=\/|$)/, '') || '/';
   const [open, setOpen] = useState(false);
   const [unread, setUnread] = useState(0);
 
@@ -27,7 +32,7 @@ export function AdminShell({ title, actions, children }: { title: string; action
   useEffect(() => (user ? subscribeUnreadLeadCount(setUnread) : undefined), [user]);
 
   useEffect(() => {
-    if (!loading && !user) router.replace('/admin/login');
+    if (!loading && !user) router.replace('/login');
   }, [loading, user, router]);
 
   if (loading || !user) {
@@ -53,13 +58,13 @@ export function AdminShell({ title, actions, children }: { title: string; action
         </div>
         <nav className="flex-1 overflow-y-auto p-2.5">
           {nav.map((n) => {
-            const active = n.href === '/admin' ? pathname === '/admin' : pathname.startsWith(n.href);
+            const active = n.href === '/' ? pathname === '/' : pathname.startsWith(n.href);
             return (
               <Link key={n.href} href={n.href} onClick={() => setOpen(false)}
                 className={`mb-0.5 flex items-center gap-2.5 rounded-md px-3 py-2 text-[13px] font-medium transition-colors ${active ? 'bg-gold text-navy' : 'text-white/75 hover:bg-white/10 hover:text-white'}`}>
                 <Icon name={n.icon} className="h-4 w-4 shrink-0" />
                 <span className="flex-1">{n.label}</span>
-                {n.href === '/admin/leads' && unread > 0 && (
+                {n.href === '/leads' && unread > 0 && (
                   <span
                     className={`rounded px-1.5 py-0.5 text-[11px] font-bold ${active ? 'bg-navy text-gold' : 'bg-gold text-navy'}`}
                     aria-label={`${unread} unopened`}
@@ -78,9 +83,11 @@ export function AdminShell({ title, actions, children }: { title: string; action
           <button onClick={() => logout()} className="flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-[13px] font-medium text-white/75 hover:bg-white/10 hover:text-white">
             <Icon name="arrow-left" className="h-4 w-4 shrink-0" /> Sign out
           </button>
-          <Link href="/" className="flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-[12px] text-white/50 hover:bg-white/10 hover:text-white">
+          {/* The public site is a different origin now, so this is a plain
+              anchor rather than a prefetching <Link>. */}
+          <a href={site.url} className="flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-[12px] text-white/50 hover:bg-white/10 hover:text-white">
             <Icon name="arrow" className="h-4 w-4 shrink-0" /> View website
-          </Link>
+          </a>
         </div>
       </aside>
 

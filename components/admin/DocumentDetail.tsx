@@ -29,7 +29,7 @@ export function DocumentDetail({ kind, id }: { kind: 'quote' | 'invoice'; id: st
     return <AdminShell title="Loading…"><p className="text-ink-muted">Loading…</p></AdminShell>;
   }
   if (doc === null) {
-    return <AdminShell title="Not found"><p className="text-ink-muted">This {kind} could not be found. <Link href={`/admin/${kind}s`} className="font-semibold text-navy underline">Back to {kind}s</Link>.</p></AdminShell>;
+    return <AdminShell title="Not found"><p className="text-ink-muted">This {kind} could not be found. <Link href={`/${kind}s`} className="font-semibold text-navy underline">Back to {kind}s</Link>.</p></AdminShell>;
   }
   if (editing) {
     return <DocumentEditor kind={kind} existing={doc} />;
@@ -41,12 +41,12 @@ export function DocumentDetail({ kind, id }: { kind: 'quote' | 'invoice'; id: st
   async function togglePaid() { setBusy(true); await setStatus(kind, id, doc!.status === 'paid' ? 'unpaid' : 'paid'); await load(); setBusy(false); }
   async function remove() {
     if (!confirm(`Delete ${doc!.number}? This cannot be undone.`)) return;
-    await deleteBusinessDoc(kind, id); router.push(`/admin/${kind}s`);
+    await deleteBusinessDoc(kind, id); router.push(`/${kind}s`);
   }
   async function convert() {
     setBusy(true);
     const { id: invId } = await convertQuoteToInvoice(doc!);
-    router.push(`/admin/invoices/${invId}`);
+    router.push(`/invoices/${invId}`);
   }
 
   return (
@@ -68,7 +68,7 @@ export function DocumentDetail({ kind, id }: { kind: 'quote' | 'invoice'; id: st
               {quoteStatuses.map((s) => <option key={s} value={s}>{s[0].toUpperCase() + s.slice(1)}</option>)}
             </Select>
             {doc.convertedInvoiceId ? (
-              <Link href={`/admin/invoices/${doc.convertedInvoiceId}`} className="text-[12px] font-semibold text-navy underline decoration-gold">View linked invoice →</Link>
+              <Link href={`/invoices/${doc.convertedInvoiceId}`} className="text-[12px] font-semibold text-navy underline decoration-gold">View linked invoice →</Link>
             ) : (
               <Button variant="primary" onClick={convert} disabled={busy}><Icon name="arrow" className="h-4 w-4" /> Convert to invoice</Button>
             )}
@@ -79,7 +79,7 @@ export function DocumentDetail({ kind, id }: { kind: 'quote' | 'invoice'; id: st
               <Icon name={doc.status === 'paid' ? 'close' : 'check'} className="h-4 w-4" />
               {doc.status === 'paid' ? 'Mark unpaid' : 'Mark paid'}
             </Button>
-            {doc.sourceQuoteId && <Link href={`/admin/quotes/${doc.sourceQuoteId}`} className="text-[12px] font-semibold text-navy underline decoration-gold">From quote →</Link>}
+            {doc.sourceQuoteId && <Link href={`/quotes/${doc.sourceQuoteId}`} className="text-[12px] font-semibold text-navy underline decoration-gold">From quote →</Link>}
           </>
         )}
         <div className="ml-auto">

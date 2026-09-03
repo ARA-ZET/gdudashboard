@@ -14,14 +14,14 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
 
-  useEffect(() => { if (!loading && user) router.replace('/admin'); }, [loading, user, router]);
+  useEffect(() => { if (!loading && user) router.replace('/'); }, [loading, user, router]);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(''); setBusy(true);
     try {
       await signIn(email, password);
-      router.replace('/admin');
+      router.replace('/');
     } catch (err: any) {
       const code = err?.code || '';
       setError(

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Icon } from '@/components/Icon';
+import { Analytics } from '@/components/Analytics';
 
 export default function NotFound() {
   return (
@@ -15,6 +16,7 @@ export default function NotFound() {
           <Link href="/services" className="btn btn-outline-light">Browse services</Link>
         </div>
       </div>
+      <Analytics />
     </section>
   );
 }

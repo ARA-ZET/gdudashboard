@@ -34,6 +34,13 @@ export const site = {
   // The canonical site URL. Overridden at build/runtime by NEXT_PUBLIC_SITE_URL.
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://goldendiamondupholstery.co.za',
 
+  /**
+   * The subdomain the staff admin is served from — `app.<domain>`. Only the
+   * label lives here; middleware.ts derives the host from whatever domain the
+   * request arrived on, so changing the domain needs no change here.
+   */
+  adminSubdomain: 'app',
+
   contact: {
     phone: '+27 81 572 3431',
     phoneHref: '27815723431',

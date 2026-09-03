@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { site } from '@/lib/site';
-import { Analytics } from '@/components/Analytics';
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -67,7 +66,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         {children}
-        <Analytics />
       </body>
     </html>
   );

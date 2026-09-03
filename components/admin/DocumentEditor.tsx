@@ -53,10 +53,10 @@ export function DocumentEditor({ kind, existing }: { kind: 'quote' | 'invoice'; 
     try {
       if (existing?.id) {
         await updateBusinessDoc(kind, existing.id, payload);
-        router.push(`/admin/${kind}s/${existing.id}`);
+        router.push(`/${kind}s/${existing.id}`);
       } else {
         const { id } = await createBusinessDoc(kind, payload as any);
-        router.push(`/admin/${kind}s/${id}`);
+        router.push(`/${kind}s/${id}`);
       }
     } finally { setBusy(false); }
   }
@@ -89,7 +89,7 @@ export function DocumentEditor({ kind, existing }: { kind: 'quote' | 'invoice'; 
               </Field>
             </div>
             {clients.length === 0 && (
-              <p className="mt-3 text-[12px] text-ink-muted">No clients yet — <a href="/admin/clients" className="font-semibold text-navy underline decoration-gold">add one first</a>.</p>
+              <p className="mt-3 text-[12px] text-ink-muted">No clients yet — <a href="/clients" className="font-semibold text-navy underline decoration-gold">add one first</a>.</p>
             )}
           </Card>
 

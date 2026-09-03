@@ -17,8 +17,11 @@ import { Suspense, useEffect } from 'react';
  *    would go uncounted. Page views are sent from an effect instead, which
  *    fires on mount (the first view) and on every route change after it.
  *
- * 2. Nothing renders under /admin, so running the business dashboard does not
- *    pollute the numbers with your own visits.
+ * 2. It is mounted by the marketing layout and the 404 page, never by the root
+ *    layout, so the staff admin on app.<domain> loads no analytics at all and
+ *    running the dashboard does not pollute the numbers with your own visits.
+ *    (A 404 *inside* the admin renders the shared not-found page and so is
+ *    counted — rare enough to be worth keeping 404 tracking on the real site.)
  */
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
@@ -55,9 +58,7 @@ function PageViews() {
 }
 
 export function Analytics() {
-  const pathname = usePathname();
-
-  if (!GA_ID || pathname.startsWith('/admin')) return null;
+  if (!GA_ID) return null;
 
   return (
     <>

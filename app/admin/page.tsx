@@ -45,8 +45,8 @@ export default function DashboardPage() {
       title="Dashboard"
       actions={
         <>
-          <LinkButton href="/admin/quotes/new" variant="outline"><Icon name="plus" className="h-4 w-4" /> Quote</LinkButton>
-          <LinkButton href="/admin/invoices/new" variant="gold"><Icon name="plus" className="h-4 w-4" /> Invoice</LinkButton>
+          <LinkButton href="/quotes/new" variant="outline"><Icon name="plus" className="h-4 w-4" /> Quote</LinkButton>
+          <LinkButton href="/invoices/new" variant="gold"><Icon name="plus" className="h-4 w-4" /> Invoice</LinkButton>
         </>
       }
     >
@@ -66,16 +66,16 @@ export default function DashboardPage() {
       <div className="mt-8">
         <div className="mb-3 flex items-center justify-between">
           <h2 className="font-serif text-base font-bold text-navy">Recent activity</h2>
-          <Link href="/admin/invoices" className="text-[12px] font-semibold text-navy hover:text-gold-700">All invoices →</Link>
+          <Link href="/invoices" className="text-[12px] font-semibold text-navy hover:text-gold-700">All invoices →</Link>
         </div>
         {recent.length === 0 ? (
           <Card className="p-8 text-center text-ink-muted">
-            Nothing yet. Start by <Link href="/admin/clients" className="font-semibold text-navy underline decoration-gold">adding a client</Link>, then create a quote or invoice.
+            Nothing yet. Start by <Link href="/clients" className="font-semibold text-navy underline decoration-gold">adding a client</Link>, then create a quote or invoice.
           </Card>
         ) : (
           <Card className="divide-y divide-outline-variant/50">
             {recent.map((d) => (
-              <Link key={`${d.kind}-${d.id}`} href={`/admin/${d.kind}s/${d.id}`} className="flex items-center gap-4 px-4 py-3 hover:bg-surface-dim/50">
+              <Link key={`${d.kind}-${d.id}`} href={`/${d.kind}s/${d.id}`} className="flex items-center gap-4 px-4 py-3 hover:bg-surface-dim/50">
                 <span className={`grid h-9 w-9 place-items-center rounded-md ${d.kind === 'invoice' ? 'bg-navy text-gold' : 'bg-surface-container text-navy'}`}>
                   <Icon name={d.kind === 'invoice' ? 'verified' : 'layers'} className="h-4 w-4" />
                 </span>
